@@ -4,18 +4,20 @@
 
 1. ### Business
     ```smalltalk
-   - Name
-   - Owner [Model] User Model or Derivative | ][ 1-1 OR * - 1 ]
+   - Business name
+   - Operation commence time
+   - Owner Name
+   - Total boats [Model] - Calculated from Boat?
     ```
 
 
 3. ### Boat
     ```smalltalk
-   - Name?
-   - Capacity?
-   - Boat Photo
+   - Boat Name
+   - Capacity
    - Captain Name
    - Captain Picture
+   - Deckhand Name
    - Review [Model] [ 1 - * ]
    - Business [Model] [ * - 1 ]
    - Average Rating [Model] - Calculated from Reviews
@@ -26,17 +28,17 @@
       - Reviewer Name?
       - Boat [Model]
       - Rating [Min 1, Max 5]
-      - Review [Actual Review, Optional?] 
+      - Review [Actual Review, Optional] 
       - DateTimeAdded [for sorting purposes]
      ```
 
 5. ### User Models
-    Customers do not require Accounts so that leaves just Owners and the Admin. In terms of authentication, which can be interpreted as:
+    Customers do not require Accounts so that leaves just PRO and the Admin. In terms of authentication, which can be interpreted as:
 
-    - Owner - Regular Users
+    - PRO - Manager vibe with administrative rights
     - Admin - Admin
 
-    1. #### Owner
+    1. #### PRO
          ```smalltalk  
         - Username?
         - Email?
