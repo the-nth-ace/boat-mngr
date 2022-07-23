@@ -17,13 +17,23 @@ def dashboard(request):
 
 
 @user_passes_test(is_admin_test)
-def all_owners(request):
+def all_businesses(request):
     return render(request, "admin/all_owners.html", context={"active": "businesses"})
+
+
+@user_passes_test(is_admin_test)
+def add_businesses(request):
+    return render(request, "admin/business_form.html", context={"active": "businesses"})
 
 
 @user_passes_test(is_admin_test)
 def all_boats(request):
     return render(request, "admin/all_boats.html", context={"active": "boats"})
+
+
+@user_passes_test(is_admin_test)
+def add_boat(request):
+    return render(request, "admin/boat_form.html", context={"active": "boats"})
 
 
 @user_passes_test(is_admin_test)
