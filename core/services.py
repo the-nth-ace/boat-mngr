@@ -6,9 +6,9 @@ def get_user_by_username(username: str):
     return user
 
 
-def is_staff_test(user: User):
+def is_admin_test(user: User):
     return user.is_staff
 
 
-def is_not_staff_test(user: User):
+def is_owner_test(user: User):
     return not user.is_staff

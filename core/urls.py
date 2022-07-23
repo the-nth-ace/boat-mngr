@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from core.views import main
+from core.views import main, owner_dashboard, admin_dashboard
 
 
 # Main Views
@@ -13,5 +13,8 @@ urlpatterns = [
 
 # Owner Dashboard Views
 
+urlpatterns += [path("owner/", owner_dashboard.dashboard, name="owner_dashboard")]
 
 # Admin Dashboard Views
+# NOTE The url is '/appadmin so as not to conflict with Django's default '/admin'
+urlpatterns += [path("appadmin/", admin_dashboard.dashboard, name="admin_dashboard")]
