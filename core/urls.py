@@ -7,8 +7,9 @@ from core.views import main, owner_dashboard, admin_dashboard
 urlpatterns = [
     path("", main.homepage, name="homepage"),
     path("businesses", main.business_list_page, name="business_list"),
+    path("businesses/<int:pk>/", main.one_business, name="business_detail"),
     path("login/", main.login_page, name="login_page"),
-    path("boat/", main.one_boat_page, name="one_boat"),
+    path("boat/<int:pk>/", main.one_boat_page, name="one_boat"),
 ]
 
 

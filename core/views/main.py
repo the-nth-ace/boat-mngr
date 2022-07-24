@@ -1,10 +1,10 @@
 import imp
-from django.shortcuts import render
+from django.shortcuts import get_list_or_404, get_object_or_404, render
 from core.services import get_user_by_username
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
-from core.models import Business
+from core.models import Boat, Business, Review
 
 
 # TODO
@@ -17,14 +17,24 @@ def homepage(request):
 ## One Boat Page
 
 
-def one_boat_page(request):
-    return render(request, "main/one_boat.html")
+def one_boat_page(request, pk):
+    boat = get_object_or_404(Boat, pk=pk)
+    reviews = Review.objects.filter(boat=boat)
+    context = {"boat": boat, "reviews": reviews}
+    return render(request, "customer/boat_detail.html", context)
 
 
 def business_list_page(request):
     businesses = Business.objects.all()
     context = {"businesses": businesses}
     return render(request, "customer/business_list.html", context)
+
+
+def one_business(request, pk):
+    business = get_object_or_404(Business, pk=pk)
+    boats = get_list_or_404(Boat, business=business)
+    context = {"business": business, "boats": boats}
+    return render(request, "customer/business_detail.html", context)
 
 
 ## Login Page
