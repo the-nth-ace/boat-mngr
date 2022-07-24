@@ -10,6 +10,8 @@ django-widget-tweaks = "*"
 whitenoise = "*"
 django-environ = "*"
 gunicorn = "*"
+psycopg2 = "*"
+dj-database-url = "*"
 
 [dev-packages]
 black = "*"
