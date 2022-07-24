@@ -32,7 +32,7 @@ def business_list_page(request):
 
 def one_business(request, pk):
     business = get_object_or_404(Business, pk=pk)
-    boats = get_list_or_404(Boat, business=business)
+    boats = Boat.objects.filter(business=business)
     context = {"business": business, "boats": boats}
     return render(request, "customer/business_detail.html", context)
 
