@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 ## Homepage
 def homepage(request):
-    return render(request, "main/index.html")
+    return render(request, "main/home.html")
 
 
 ## One Boat Page
