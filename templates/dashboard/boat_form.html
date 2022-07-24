@@ -1,0 +1,78 @@
+{% extends "dashboard_base.html" %}
+{% load widget_tweaks %}
+{% block title %}
+    Add Boat
+{% endblock title %}
+{% block content %}
+    <div class="py-4">
+        <h1 class="h4">Add New Boat</h1>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-12">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card border-0 shadow components-section">
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <form class="col-lg-12 col-sm-12"
+                                      enctype="multipart/form-data"
+                                      method="post">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="name">Boat Name</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="name"
+                                               name="name"
+                                               aria-describedby="boatNamelHelp"
+                                               required/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="capcity">Boat Capacity</label>
+                                        <input type="number"
+                                               class="form-control"
+                                               id="capacity"
+                                               name="capacity"
+                                               required/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="captain_name">Boat Captain Name</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="captain_name"
+                                               name="captain_name"
+                                               required/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="captain_photo" class="form-label">Boat Captain Photo</label>
+                                        <input class="form-control"
+                                               type="file"
+                                               id="captain_photo"
+                                               name="captain_photo"
+                                               accep
+                                               image
+                                               required/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="deckhand">Boat Deckhand Name</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="deckhand"
+                                               name="deckhand"
+                                               required/>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="my-1 me-2" for="country">Business</label>
+                                        {% render_field form.business class="form-select" %}
+                                    </div>
+                                    <button class="btn btn-gray-800 d-inline-flex align-items-center me-2 "
+                                            type="submit">Add Boat</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
