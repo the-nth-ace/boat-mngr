@@ -58,9 +58,18 @@ class Boat(models.Model):
 
     
     @property
+    def captain_static_photo(self):
+        name_list = self.name.split('&')
+        final_name_list = name_list[0]
+        name_list = name_list[-1].split(' ')
+        name_list = ''.join(name_list)
+        return final_name_list + name_list + '.jpg'
+
+    
+    @property
     def deckhand_photo(self):
         number = self.name[-1]
-        return f'D{number}'
+        return f'D{number}.jpg'
 
 
 class Review(models.Model):
