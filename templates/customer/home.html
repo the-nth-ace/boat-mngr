@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
   <div class="carousel-inner" role="listbox">
     <!--First slide-->
     <div class="carousel-item active">
       <div class="view"
-        style="background-image: url('/core/static/core/assets/img/Group\ 5.png'); background-repeat: no-repeat; background-size: cover;">
+        style="background-image: url('/static/core/assets/img/Group%205.png'); background-repeat: no-repeat; background-size: cover;">
         <!-- Mask & flexbox options-->
         <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
           <!-- Content -->
@@ -32,8 +33,7 @@
 <div class="section-3">
   <div class="card-group card-grp">
     <div class="card align-items-center card1">
-      <!-- FIXME -->
-      <img src="/core/static/core/assets/img/LASWA.png" class="card-img-top logo-class" alt="..." />
+      <img src="{% static 'core/assets/img/LASWA.png' %}" class="card-img-top logo-class" alt="..." />
       <div class="card-body">
         <h5 class="card-title">
           Lagos Waterways Authority
@@ -41,10 +41,10 @@
           (LASWA)
         </h5>
       </div>
+
     </div>
     <div class="card align-items-center card2">
-      <!-- FIXME -->
-      <img src="/core/static/core/assets/img/niwa.jpg" class="card-img-top logo-class2" alt="..." />
+      <img src="{% static 'core/assets/img/niwa.jpg' %}" class="card-img-top logo-class2" alt="..." />
       <div class="card-body card-bdy">
         <h5 class="card-title card-title-1">
           National Inland Waterways Authority

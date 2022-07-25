@@ -14,7 +14,8 @@ def homepage(request):
     return render(request, "customer/home.html")
 
 
-## One Boat Page
+def dashboard(request):
+    return render(request, "dashboard/dashboard.html", context={"active": "dashboard"})
 
 
 def one_boat_page(request, pk):
