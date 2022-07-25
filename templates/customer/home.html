@@ -1,62 +1,57 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-  <div id="carousel-example-1z"
-       class="carousel slide carousel-fade"
-       data-ride="carousel">
-    <div class="carousel-inner" role="listbox">
-      <!--First slide-->
-      <div class="carousel-item active">
-        <div class="view"
-             style="background-image: url('/core/static/core/assets/img/Group\ 5.png'); background-repeat: no-repeat; background-size: cover;">
-          <!-- Mask & flexbox options-->
-          <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-            <!-- Content -->
-            <div class="text-center">
-              <h1 class="text-2">
-                <strong>Welcome to the website of
-                  <br />
-                  The Association of Tourist Boat Operators and Water
-                  <br />
-                  Transporters of Nigeria
-                  <br />
+<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+  <div class="carousel-inner" role="listbox">
+    <!--First slide-->
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('/core/static/core/assets/img/Group\ 5.png'); background-repeat: no-repeat; background-size: cover;">
+        <!-- Mask & flexbox options-->
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+          <!-- Content -->
+          <div class="text-center">
+            <h1 class="text-2">
+              <strong>Welcome to the website of
+                <br />
+                The Association of Tourist Boat Operators and Water
+                <br />
+                Transporters of Nigeria
+                <br />
                 (ATBOWATON), Ikorodu Zone of Lagos</strong>
-              </h1>
-            </div>
-            <!-- Content -->
+            </h1>
           </div>
+          <!-- Content -->
         </div>
       </div>
     </div>
   </div>
-  <div class="section-3-h">
-    <h3>Approved By:</h3>
-  </div>
-  <div class="section-3">
-    <div class="card-group card-grp">
-      <div class="card align-items-center card1">
-        <img src="{% static 'core/assets/img/LASWA.png' %}"
-             class="card-img-top logo-class"
-             alt="..."/>
-        <div class="card-body">
-          <h5 class="card-title">
-            Lagos Waterways Authority
-            <br />
-            (LASWA)
-          </h5>
-        </div>
-        1
+</div>
+<div class="section-3-h">
+  <h3>Approved By:</h3>
+</div>
+<div class="section-3">
+  <div class="card-group card-grp">
+    <div class="card align-items-center card1">
+      <img src="{% static 'core/assets/img/LASWA.png' %}" class="card-img-top logo-class" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">
+          Lagos Waterways Authority
+          <br />
+          (LASWA)
+        </h5>
       </div>
-      <div class="card align-items-center card2">
-        <img src="{% static 'core/assets/img/niwa.jpg' %}"
-             class="card-img-top logo-class2"
-             alt="..."/>
-        <div class="card-body card-bdy">
-          <h5 class="card-title card-title-1">
-            National Inland Waterways Authority
-            (NIWA)
-          </h5>
-        </div>
+      1
+    </div>
+    <div class="card align-items-center card2">
+      <img src="{% static 'core/assets/img/niwa.jpg' %}" class="card-img-top logo-class2" alt="..." />
+      <div class="card-body card-bdy">
+        <h5 class="card-title card-title-1">
+          National Inland Waterways Authority
+          (NIWA)
+        </h5>
       </div>
     </div>
   </div>
+</div>
 {% endblock content %}
