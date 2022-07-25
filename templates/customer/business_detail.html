@@ -19,7 +19,7 @@
             {% for boat in boats %}
             <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
                 <a class="block relative h-48 rounded overflow-hidden" href="{% url 'one_boat' boat.pk %}">
-                    <img alt="ecommerce" height="" width="" class="object-contain object-center w-full h-full block"
+                    <img alt="ecommerce" height="" width="" class="object-cover object-center w-full h-full block"
                         src="/static/core/boats/{{ boat.captain_static_photo }}"/>
                 </a>
                 <div class="mt-4">
