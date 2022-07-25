@@ -56,6 +56,12 @@ class Boat(models.Model):
     def __str__(self):
         return self.name
 
+    
+    @property
+    def deckhand_photo(self):
+        number = self.name[-1]
+        return f'D{number}'
+
 
 class Review(models.Model):
     name = models.CharField(max_length=100)
