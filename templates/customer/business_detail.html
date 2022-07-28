@@ -20,7 +20,7 @@
             <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
                 <a class="block relative h-48 rounded overflow-hidden" href="{% url 'one_boat' boat.pk %}">
                     <img alt="ecommerce" height="" width="" class="object-cover object-center w-full h-full block"
-                        src="/static/core/boats/{{ boat.captain_static_photo }}"/>
+                        src="{{ boat.captain_photo.url }}" />
                 </a>
                 <div class="mt-4">
                     <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{ boat.captain_name}}</h3>

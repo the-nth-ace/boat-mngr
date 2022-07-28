@@ -1,6 +1,5 @@
-from django.contrib import admin
-from django.urls import path, include
-from core.views import main, owner_dashboard, admin_dashboard
+from django.urls import path
+from core.views import dashboard, main
 
 
 # Main Views
@@ -16,30 +15,30 @@ urlpatterns = [
 # Dashboard Views
 ## ! Businesses
 urlpatterns += [
-    path("dashboard/", main.dashboard, name="dashboard" ),
+    path("dashboard/", main.dashboard, name="dashboard"),
     path(
         "dashboard/businesses",
-        admin_dashboard.BusinessListView.as_view(),
+        dashboard.BusinessListView.as_view(),
         name="dashboard_business_list",
     ),
     path(
         "dashboard/businesses/add",
-        admin_dashboard.BusinessCreateView.as_view(),
+        dashboard.BusinessCreateView.as_view(),
         name="dashboard_business_add",
     ),
     path(
         "dashboard/businesses/update/<int:pk>/",
-        admin_dashboard.BusinessUpdateView.as_view(),
+        dashboard.BusinessUpdateView.as_view(),
         name="dashboard_business_update",
     ),
     path(
         "dashboard/businesses/<int:pk>/delete",
-        admin_dashboard.delete_business,
+        dashboard.delete_business,
         name="dashboard_business_delete",
     ),
     path(
         "dashboard/businesses/<int:pk>",
-        admin_dashboard.BusinessDetailView.as_view(),
+        dashboard.BusinessDetailView.as_view(),
         name="dashboard_business_detail",
     ),
 ]
@@ -49,32 +48,29 @@ urlpatterns += [
 urlpatterns += [
     path(
         "dashboard/boats",
-        admin_dashboard.BoatListView.as_view(),
+        dashboard.BoatListView.as_view(),
         name="dashboard_boat_list",
     ),
     path(
         "dashboard/boats/add/",
-        admin_dashboard.BoatCreateView.as_view(),
+        dashboard.BoatCreateView.as_view(),
         name="dashboard_boat_add",
     ),
     path(
         "dashboard/boats/<int:pk>/",
-        admin_dashboard.BoatDetailView.as_view(),
+        dashboard.BoatDetailView.as_view(),
         name="dashboard_boat_detail",
     ),
     path(
         "dashboard/boats/<int:pk>/delete",
-        admin_dashboard.delete_business,
+        dashboard.delete_business,
         name="dashboard_boat_delete",
     ),
 ]
 
 
 # Admin Dashboard Views
-# NOTE The url is '/appadmin so as not to conflict with Django's default '/admin'
+# FIXME The url is '/appadmin so as not to conflict with Django's default '/admin'
 urlpatterns += [
-    # path("appadmin/", admin_dashboard.dashboard, name="admin_dashboard"),
-    path("appadmin/boats/", admin_dashboard.all_boats, name="admin_all_boats"),
-    path("appadmin/boats/add", admin_dashboard.add_boat, name="admin_add_boat"),
-    path("appadmin/reviews/", admin_dashboard.all_reviews, name="admin_all_reviews"),
+    path("appadmin/reviews/", dashboard.all_reviews, name="admin_all_reviews"),
 ]
