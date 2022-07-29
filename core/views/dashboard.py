@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from core.forms import BoatForm
-from core.models import Boat, Business
+from core.models import Boat, Operator
 
 from core.services import is_admin_test
 
@@ -21,17 +21,17 @@ def all_reviews(request):
     return render(request, "dashboard/all_reviews.html", context={"active": "reviews"})
 
 
-# * Business Views
+# * Operator Views
 
 
-class BusinessViewSetup:
-    model = Business
-    success_url = reverse_lazy("dashboard_business_list")
+class OperatorViewSetup:
+    model = Operator
+    success_url = reverse_lazy("dashboard_Operator_list")
 
 
-class BusinessListView(BusinessViewSetup, ListView):
+class OperatorListView(OperatorViewSetup, ListView):
     context_object_name: Optional[str] = "businesses"
-    template_name: str = "dashboard/business_list.html"
+    template_name: str = "dashboard/Operator_list.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -39,27 +39,27 @@ class BusinessListView(BusinessViewSetup, ListView):
         return context
 
 
-class BusinessCreateView(BusinessViewSetup, CreateView):
+class OperatorCreateView(OperatorViewSetup, CreateView):
     fields = ["name", "owner", "operation_commenced"]
     template_name: str = "dashboard/business_form.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["active"] = "businesses"
+        context["active"] = "business"
         return context
 
 
-class BusinessUpdateView(BusinessViewSetup, UpdateView):
+class OperatorUpdateView(OperatorViewSetup, UpdateView):
     fields = ["name", "owner", "operation_commenced"]
-    template_name: str = "dashboard/business_update_form.html"
+    template_name: str = "dashboard/Operator_update_form.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["active"] = "businesses"
+        context["active"] = "business"
         return context
 
 
-class BusinessDetailView(BusinessViewSetup, DetailView):
+class OperatorDetailView(OperatorViewSetup, DetailView):
     context_object_name: Optional[str] = "business"
     template_name: str = "dashboard/business_detail.html"
 
@@ -70,8 +70,8 @@ class BusinessDetailView(BusinessViewSetup, DetailView):
 
 
 def delete_business(request, pk):
-    business = get_object_or_404(Business, pk=pk)
-    business.delete()
+    Operator = get_object_or_404(Operator, pk=pk)
+    Operator.delete()
     return redirect(reverse("dashboard_business_list"))
 
 
@@ -97,7 +97,7 @@ class BoatCreateView(BoatViewSetup, CreateView):
         "captain_name",
         "captain_photo",
         "deckhand",
-        "business",
+        "Operator",
     ]
     template_name: str = "dashboard/boat_form.html"
 
@@ -125,7 +125,7 @@ class BoatUpdateView(BoatViewSetup, UpdateView):
         "captain_name",
         "captain_photo",
         "deckhand",
-        "business",
+        "Operator",
     ]
 
     template_name: str = "dashboard/boat_update_form.html"
@@ -136,7 +136,7 @@ class BoatUpdateView(BoatViewSetup, UpdateView):
         return context
 
 
-def delete_business(request, pk):
+def delete_Operator(request, pk):
     boat = get_object_or_404(Boat, pk=pk)
     boat.delete()
     return redirect(reverse("dashboard_boat_list"))
