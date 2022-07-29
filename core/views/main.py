@@ -4,7 +4,7 @@ from core.services import get_user_by_username
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
-from core.models import Boat, Business, Review
+from core.models import Boat, Operator, Review
 
 
 # TODO
@@ -26,15 +26,15 @@ def one_boat_page(request, pk):
 
 
 def business_list_page(request):
-    businesses = Business.objects.all()
-    context = {"businesses": businesses}
-    return render(request, "customer/business_list.html", context)
+    operatores = Operator.objects.all()
+    context = {"businesses": operatores}
+    return render(request, "customer/Operator_list.html", context)
 
 
 def one_business(request, pk):
-    business = get_object_or_404(Business, pk=pk)
-    boats = Boat.objects.filter(business=business)
-    context = {"business": business, "boats": boats}
+    operator = get_object_or_404(Operator, pk=pk)
+    boats = Boat.objects.filter(operator=Operator)
+    context = {"business": Operator, "boats": boats}
     return render(request, "customer/business_detail.html", context)
 
 
