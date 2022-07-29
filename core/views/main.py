@@ -1,21 +1,15 @@
-import imp
-from django.shortcuts import get_list_or_404, get_object_or_404, render
-from core.services import get_user_by_username
+
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from core.models import Boat, Operator, Review
 
 
-# TODO
-
-## Homepage
 def homepage(request):
     return render(request, "customer/home.html")
 
 
-def dashboard(request):
-    return render(request, "dashboard/dashboard.html", context={"active": "dashboard"})
 
 
 def one_boat_page(request, pk):

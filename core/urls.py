@@ -15,31 +15,31 @@ urlpatterns = [
 # Dashboard Views
 ## ! Businesses
 urlpatterns += [
-    path("dashboard/", main.dashboard, name="dashboard"),
+    path("dashboard/", dashboard.dashboard, name="dashboard"),
     path(
-        "dashboard/businesses",
+        "dashboard/operators/",
         dashboard.OperatorListView.as_view(),
-        name="dashboard_business_list",
+        name="dashboard_operator_list",
     ),
     path(
-        "dashboard/businesses/add",
+        "dashboard/operators/add/",
         dashboard.OperatorCreateView.as_view(),
-        name="dashboard_business_add",
+        name="dashboard_operator_add",
     ),
     path(
-        "dashboard/businesses/update/<int:pk>/",
+        "dashboard/operators/update/<int:pk>/",
         dashboard.OperatorUpdateView.as_view(),
-        name="dashboard_business_update",
+        name="dashboard_operator_update",
     ),
     path(
-        "dashboard/businesses/<int:pk>/delete",
-        dashboard.delete_business,
-        name="dashboard_business_delete",
+        "dashboard/operators/<int:pk>/delete/",
+        dashboard.delete_operator,
+        name="dashboard_operator_delete",
     ),
     path(
-        "dashboard/businesses/<int:pk>",
+        "dashboard/operators/<int:pk>/",
         dashboard.OperatorDetailView.as_view(),
-        name="dashboard_business_detail",
+        name="dashboard_operator_detail",
     ),
 ]
 
@@ -63,14 +63,9 @@ urlpatterns += [
     ),
     path(
         "dashboard/boats/<int:pk>/delete",
-        dashboard.delete_business,
+        dashboard.delete_boat,
         name="dashboard_boat_delete",
     ),
 ]
 
-
-# Admin Dashboard Views
-# FIXME The url is '/appadmin so as not to conflict with Django's default '/admin'
-urlpatterns += [
-    path("appadmin/reviews/", dashboard.all_reviews, name="admin_all_reviews"),
-]
+# Reviews View

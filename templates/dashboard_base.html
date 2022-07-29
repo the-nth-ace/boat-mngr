@@ -141,8 +141,8 @@
                         <span class="sidebar-text">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item {% if active == 'businesses' %} active {% endif %}">
-                    <a href="{% url 'dashboard_business_list' %}" class="nav-link d-flex justify-content-between">
+                <li class="nav-item {% if active == 'operators' %} active {% endif %}">
+                    <a href="{% url 'dashboard_operator_list' %}" class="nav-link d-flex justify-content-between">
                         <span>
                             <span class="sidebar-icon">
                                 <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
@@ -152,7 +152,7 @@
                                     </path>
                                 </svg>
                             </span>
-                            <span class="sidebar-text">Businesses</span>
+                            <span class="sidebar-text">Operators</span>
                         </span>
 
                     </a>
@@ -172,7 +172,7 @@
                     </a>
                 </li>
                 <li class="nav-item {% if active == 'reviews' %} active {% endif %}">
-                    <a href="{% url 'admin_all_reviews' %}" class="nav-link d-flex justify-content-between">
+                    <a href="#" class="nav-link d-flex justify-content-between">
                         <span>
                             <span class="sidebar-icon">
                                 <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
@@ -463,11 +463,15 @@
     <script src="{% static 'core/vendor/@popperjs/core/dist/umd/popper.min.js' %}"></script>
     <script src="{% static 'core/vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 
+    <script src="{% static 'core/vendor/sweetalert2/dist/sweetalert2.all.min.js' %}"></script>
     <!-- Vendor JS -->
     <script src="{% static 'core/vendor/onscreen/dist/on-screen.umd.min.js' %}"></script>
 
     <!-- Volt JS -->
     <script src="{% static 'core/assets/js/volt.js' %}"></script>
+
+    <!-- Datepicker -->
+    <script src="{% static 'core/vendor/vanillajs-datepicker/dist/js/datepicker.min.js' %}"></script>
 
 </body>
 

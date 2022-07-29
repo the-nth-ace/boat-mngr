@@ -1,10 +1,8 @@
 {% extends 'dashboard_base.html' %}
+{% load widget_tweaks %}
 {% block title %}
 Add Boat
 {% endblock title %}
-
-
-
 
 {% block content %}
 
@@ -20,11 +18,11 @@ Add Boat
                     <div class="card-body">
                         <div class="row mb-4">
                             <form class="col-lg-12 col-sm-12" method="POST"
-                                action="{% url 'dashboard_business_update' form.instance.pk %}">
+                                action="{% url 'dashboard_operator_update' form.instance.pk %}">
                                 {% csrf_token %}
 
                                 <div class="mb-3">
-                                    <label for="name">Business Name</label>
+                                    <label for="name">Operator Name</label>
                                     <input type="text" value="{{ form.name.value|default_if_none:"" }}"
                                         class="form-control {% if form.errors.name %}is-invalid{% endif %}" id="name"
                                         name="name" required>
@@ -38,23 +36,24 @@ Add Boat
 
                                 </div>
                                 <div class="mb-3">
-                                    <label for="owner">Owner Name</label>
-                                    <input type="text" value="{{ form.owner.value }}" class="form-control" id="owner"
-                                        name="owner" required>
+                                    <label for="contact_info">Contact Info</label>
+                                    <input type="text" value="{{ form.contact_info.value }}" class="form-control" id="contact_info"
+                                        name="contact_info" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="operation_commenced">Business Operation Commenced</label>
+                                    <label for="operation_commenced">Operation Commenced</label>
                                     <input type="number" value="{{ form.operation_commenced.value }}"
                                         class="form-control" id="operation_commenced" name="operation_commenced"
                                         required>
                                 </div>
+                                <div class="mb-4">
+                                    <label class="my-1 me-2" for="country">Association</label>
+                                    {% render_field form.association class="form-select" %}
+                                </div>
                                 <button class="btn btn-gray-800 d-inline-flex align-items-center me-2 " type="submit">
-                                    Edit Business
+                                    Edit Operator
                                 </button>
                             </form>
-
-
-
                         </div>
                     </div>
                 </div>
