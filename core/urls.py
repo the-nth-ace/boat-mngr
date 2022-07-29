@@ -18,17 +18,17 @@ urlpatterns += [
     path("dashboard/", main.dashboard, name="dashboard"),
     path(
         "dashboard/businesses",
-        dashboard.BusinessListView.as_view(),
+        dashboard.OperatorListView.as_view(),
         name="dashboard_business_list",
     ),
     path(
         "dashboard/businesses/add",
-        dashboard.BusinessCreateView.as_view(),
+        dashboard.OperatorCreateView.as_view(),
         name="dashboard_business_add",
     ),
     path(
         "dashboard/businesses/update/<int:pk>/",
-        dashboard.BusinessUpdateView.as_view(),
+        dashboard.OperatorUpdateView.as_view(),
         name="dashboard_business_update",
     ),
     path(
@@ -38,7 +38,7 @@ urlpatterns += [
     ),
     path(
         "dashboard/businesses/<int:pk>",
-        dashboard.BusinessDetailView.as_view(),
+        dashboard.OperatorDetailView.as_view(),
         name="dashboard_business_detail",
     ),
 ]

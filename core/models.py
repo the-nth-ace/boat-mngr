@@ -1,25 +1,12 @@
+from distutils.command.upload import upload
 from django.db import models
-from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
 
-# Create your models here.
-# class Owner(models.Model):
 
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     # TODO
-#     # BUSINESS
-
-#     def __str__(self):
-#         return self.name
-
-#     def get_absolute_url(self):
-#         return reverse("owner_detail", kwargs={"pk": self.pk})
-
-
-class Business(models.Model):
+class Operator(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    owner = models.CharField(max_length=255)
+    contact_info = models.CharField(max_length=255)
     operation_commenced = models.IntegerField()
 
     def __str__(self):
@@ -30,11 +17,11 @@ class Business(models.Model):
 
     @property
     def boats(self):
-        return Boat.objects.filter(business=self).count()
+        return Boat.objects.filter(operator=self).count()
 
     @property
     def reviews(self):
-        boats = Boat.objects.filter(business=self)
+        boats = Boat.objects.filter(operator=self)
         reviews = [Review.objects.filter(boat=boat).count() for boat in boats]
         return sum(reviews)
 
@@ -50,37 +37,25 @@ class Boat(models.Model):
     name = models.CharField(max_length=100)
     capacity = models.IntegerField()
     captain_name = models.CharField(max_length=100)
-    captain_photo = models.ImageField(upload_to="images/")
-    deckhand = models.CharField(max_length=100)
-    business = models.ForeignKey(Business, on_delete=models.CASCADE)
+    captain_certificaiton = models.CharField(max_length=1000, default="")
+    captain_photo = models.ImageField(upload_to="captains/")
+    deckhand_name = models.CharField(max_length=100)
+    deckhand_photo = models.ImageField(upload_to="deckhand/")
+    operator = models.ForeignKey(Operator, on_delete=models.CASCADE)
+    niwa_approval_date = models.DateField()
+    laswa_approval_date = models.DateField()
+    certification_status = models.CharField(max_length=1000, default="")
 
     def __str__(self):
         return self.name
 
-    
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        img = Image.open
-
-    
-    # @property
-    # def captain_static_photo(self):
-    #     name_list = self.name.split('&')
-    #     final_name_list = name_list[0]
-    #     name_list = name_list[-1].split(' ')
-    #     name_list = ''.join(name_list)
-    #     return final_name_list + name_list + '.jpg'
-
-    
-    # @property
-    # def deckhand_photo(self):
-    #     number = self.name[-1]
-    #     return f'D{number}.jpg'
+    @property
+    def reviews(self):
+        return Review.objects.filter(boat=self).order_by("created")
 
 
 class Review(models.Model):
-    name = models.CharField(max_length=100)
+    reviewer_name = models.CharField(max_length=100)
     rating = models.IntegerField()
     content = models.TextField()
     boat = models.ForeignKey(Boat, on_delete=models.CASCADE)
