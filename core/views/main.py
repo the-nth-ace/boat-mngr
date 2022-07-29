@@ -1,15 +1,13 @@
-
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.urls import reverse
 from core.models import Boat, Operator, Review
 
 
 def homepage(request):
     return render(request, "customer/home.html")
-
-
 
 
 def one_boat_page(request, pk):
@@ -36,6 +34,7 @@ def one_business(request, pk):
 
 
 def login_page(request):
+    context = {"error": False}
     if request.method == "POST":
         username: str = request.POST["username"]
         password: str = request.POST["password"]
@@ -43,13 +42,11 @@ def login_page(request):
         # Todo
         if user is not None:
             login(request, user)
-            if user.is_staff:
-                print("Redirect to admin")
-            else:
-                print("Redirect to owner dashboard")
+            return redirect(reverse("dashboard"))
         else:
-            print("Error occurred!")
+            context = {"error": True}
+            return render(request, "main/login.html", context)
 
         # Authenticate user here
 
-    return render(request, "main/login.html")
+    return render(request, "main/login.html", context)
