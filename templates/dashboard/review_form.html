@@ -1,0 +1,84 @@
+{% extends 'dashboard_base.html' %} {% load widget_tweaks %} {% block title %}
+Add Review {% endblock title %} {% block content %}
+<div class="py-4">
+  <h1 class="h4">Add New Review</h1>
+</div>
+
+<div class="row">
+  <div class="col-12 col-xl-12">
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card border-0 shadow components-section">
+          <div class="card-body">
+            <div class="row mb-4">
+              <form
+                class="col-lg-12 col-sm-12"
+                method="POST"
+                action="{% url 'dashboard_review_add' %}"
+              >
+                {% csrf_token %}
+
+                <div class="mb-3">
+                  <label for="reviewer_name">Reviewer Name</label>
+                  <input
+                    type="text"
+                    class="form-control {% if form.errors.reviewer_name %}is-invalid{% endif %}"
+                    id="reviewer_name"
+                    name="reviewer_name"
+                    required
+                  />
+
+                  {% if form.errors.reviewer_name %}
+                  <div class="invalid-feedback">
+                    {{ form.errors.reviewer_name}}
+                  </div>
+                  {% endif %}
+                </div>
+
+                <div class="mb-4">
+                  <label class="my-1 me-2" for="boat">Boat</label>
+                  {% render_field form.boat class="form-select" %}
+                </div>
+
+                <div class="mb-3">
+                  <label for="rating">Rating</label>
+                  <input
+                    type="number"
+                    class="form-control form-control {% if form.errors.reviewer_name %}is-invalid{% endif %}"
+                    id="rating"
+                    name="rating"
+                    required
+                  />
+                  {% if form.errors.rating %}
+                  <div class="invalid-feedback">{{ form.errors.rating}}</div>
+                  {% endif %}
+                </div>
+                <div class="mb-3">
+                  <label for="content">Content</label>
+                  <textarea
+                    class="form-control {% if form.errors.content %}is-invalid{% endif %}"
+                    placeholder="Enter your review..."
+                    id="content"
+                    name="content"
+                    rows="4"
+                  ></textarea>
+                  {% if form.errors.content %}
+                  <div class="invalid-feedback">{{ form.errors.content}}</div>
+                  {% endif %}
+                </div>
+                <button
+                  class="btn btn-gray-800 d-inline-flex align-items-center me-2"
+                  type="submit"
+                >
+                  Add Review
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

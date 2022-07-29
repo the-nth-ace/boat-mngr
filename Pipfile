@@ -13,6 +13,7 @@ psycopg2 = "*"
 dj-database-url = "*"
 boto3 = "*"
 django-storages = "*"
+django-cleanup = "*"
 
 [dev-packages]
 black = "*"

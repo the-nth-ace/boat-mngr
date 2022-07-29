@@ -13,7 +13,8 @@ urlpatterns = [
 
 
 # Dashboard Views
-## ! Businesses
+
+# ! Businesses
 urlpatterns += [
     path("dashboard/", dashboard.dashboard, name="dashboard"),
     path(
@@ -47,7 +48,7 @@ urlpatterns += [
 # ! Boats
 urlpatterns += [
     path(
-        "dashboard/boats",
+        "dashboard/boats/",
         dashboard.BoatListView.as_view(),
         name="dashboard_boat_list",
     ),
@@ -62,9 +63,43 @@ urlpatterns += [
         name="dashboard_boat_detail",
     ),
     path(
-        "dashboard/boats/<int:pk>/delete",
+        "dashboard/boats/<int:pk>/delete/",
         dashboard.delete_boat,
         name="dashboard_boat_delete",
+    ),
+    path(
+        "dashboard/boats/<int:pk>/update/",
+        dashboard.BoatUpdateView.as_view(),
+        name="dashboard_boat_update",
+    ),
+]
+
+# ! Reviews
+urlpatterns += [
+    path(
+        "dashboard/reviews/",
+        dashboard.ReviewListView.as_view(),
+        name="dashboard_review_list",
+    ),
+    path(
+        "dashboard/reviews/add/",
+        dashboard.ReviewCreateView.as_view(),
+        name="dashboard_review_add",
+    ),
+    path(
+        "dashboard/reviews/<int:pk>/",
+        dashboard.ReviewDetailView.as_view(),
+        name="dashboard_review_detail",
+    ),
+    path(
+        "dashboard/reviews/<int:pk>/delete/",
+        dashboard.delete_review,
+        name="dashboard_review_delete",
+    ),
+    path(
+        "dashboard/reviews/<int:pk>/update/",
+        dashboard.ReviewUpdateView.as_view(),
+        name="dashboard_review_update",
     ),
 ]
 

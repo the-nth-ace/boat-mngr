@@ -48,12 +48,12 @@ class Boat(models.Model):
 
     def rename_captain_boat_photo_path(instance, filename) -> str:
         basefilename, file_extension = os.path.splitext(filename)
-        return f'mediafiles/captains/{instance.operator.name}_{instance.name.lower()}{file_extension}'
+        return f'mediafiles/captains/{instance.operator.name.lower()}_{instance.name.lower()}{file_extension}'
 
 
     def rename_deckhand_boat_photo_path(instance, filename) -> str:
         basefilename, file_extension = os.path.splitext(filename)
-        return f'mediafiles/deckhands/{instance.operator.name}_{instance.name.lower()}{file_extension}'
+        return f'mediafiles/deckhands/{instance.operator.name.lower()}_{instance.name.lower()}{file_extension}'
 
 
     name = models.CharField(max_length=100)

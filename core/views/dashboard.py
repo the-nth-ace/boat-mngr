@@ -1,12 +1,9 @@
 from typing import Any, Dict, Optional
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from core.forms import BoatForm
-from core.models import Boat, Operator
+from core.models import Boat, Operator, Review
 
-from core.services import is_admin_test
 
 
 def dashboard(request):
@@ -110,17 +107,9 @@ class BoatDetailView(BoatViewSetup, DetailView):
         return context
 
 
-# FIXME fix form
 class BoatUpdateView(BoatViewSetup, UpdateView):
-    fields = [
-        "name",
-        "capacity",
-        "captain_name",
-        "captain_photo",
-        "deckhand",
-        "Operator",
-    ]
-
+    fields = ["name", "capacity", "captain_name", "captain_certification", "captain_photo", "deckhand_name", 
+    "deckhand_photo", "operator", "niwa_approval_date", "laswa_approval_date", "certification_status"]
     template_name: str = "dashboard/boat_update_form.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -132,3 +121,57 @@ def delete_boat(request, pk):
     boat = get_object_or_404(Boat, pk=pk)
     boat.delete()
     return redirect(reverse("dashboard_boat_list"))
+
+
+class ReviewViewSetup:
+    model = Review
+    success_url = reverse_lazy("dashboard_review_list")
+
+
+class ReviewListView(ReviewViewSetup, ListView):
+    context_object_name: Optional[str] = "reviews"
+    template_name: str = "dashboard/review_list.html"
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["active"] = "reviews"
+        return context
+
+
+class ReviewCreateView(ReviewViewSetup, CreateView):
+    fields =["reviewer_name",  "rating", "content", "boat"]
+    template_name: str = "dashboard/review_form.html"
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["active"] = "reviews"
+        return context
+
+    def form_invalid(self, form):
+        print(form.errors.as_json())
+        return super().form_invalid(form)
+
+
+class ReviewDetailView(ReviewViewSetup, DetailView):
+    context_object_name: Optional[str] = "review"
+    template_name: str = "dashboard/review_detail.html"
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["active"] = "reviews"
+        return context
+
+
+class ReviewUpdateView(ReviewViewSetup, UpdateView):
+    fields = ["reviewer_name",  "rating", "content", "boat"]
+    template_name: str = "dashboard/review_update_form.html"
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["active"] = "reviews"
+        return context
+
+def delete_review(request, pk):
+    Review = get_object_or_404(Review, pk=pk)
+    Review.delete()
+    return redirect(reverse("dashboard_eview_list"))
