@@ -6,7 +6,7 @@ from core.models import Boat, Operator, Review
 
 
 def homepage(request):
-    return render(request, "customer/home.html")
+    return render(request, "customer/index.html")
 
 
 def one_boat_page(request, pk):
@@ -18,15 +18,15 @@ def one_boat_page(request, pk):
 
 def business_list_page(request):
     operatores = Operator.objects.all()
-    context = {"businesses": operatores}
+    context = {"operators": operatores}
     return render(request, "customer/Operator_list.html", context)
 
 
 def one_business(request, pk):
     operator = get_object_or_404(Operator, pk=pk)
     boats = Boat.objects.filter(operator=Operator)
-    context = {"business": Operator, "boats": boats}
-    return render(request, "customer/business_detail.html", context)
+    context = {"operator": operator, "boats": boats}
+    return render(request, "customer/operator_detail.html", context)
 
 
 ## Login Page

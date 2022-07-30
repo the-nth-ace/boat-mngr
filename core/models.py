@@ -3,17 +3,23 @@ from django.db import models
 from django.urls import reverse
 
 
-
 class Operator(models.Model):
     class AssociationChoices(models.TextChoices):
-        ATBOWATON = 'atbo', 'Association of Tourists Boat Operators and Water Transporters of Nigeria'
-        UFTA = 'ufta', "United Ferry Transporters' Association"
-        IBOA = 'iboa', "Integrated Boat Operators Association"
+        ATBOWATON = (
+            "atbo",
+            "Association of Tourists Boat Operators and Water Transporters of Nigeria",
+        )
+        UFTA = "ufta", "United Ferry Transporters' Association"
+        IBOA = "iboa", "Integrated Boat Operators Association"
 
     name = models.CharField(max_length=255, unique=True)
     contact_info = models.CharField(max_length=255)
     operation_commenced = models.IntegerField()
-    association = models.CharField(max_length=4, choices=AssociationChoices.choices, default=AssociationChoices.ATBOWATON)
+    association = models.CharField(
+        max_length=4,
+        choices=AssociationChoices.choices,
+        default=AssociationChoices.ATBOWATON,
+    )
 
     def __str__(self):
         return self.name
@@ -22,9 +28,7 @@ class Operator(models.Model):
         return self.name
 
     def get_absolute_url(self) -> str:
-        return reverse('dashboard_operator_detail', kwargs={
-            "pk": self.pk
-        })
+        return reverse("dashboard_operator_detail", kwargs={"pk": self.pk})
 
     @property
     def boats(self):
@@ -42,19 +46,16 @@ class Operator(models.Model):
 
 
 class Boat(models.Model):
-
     class Meta:
-        unique_together = ['name', 'operator']
+        unique_together = ["name", "operator"]
 
     def rename_captain_boat_photo_path(instance, filename) -> str:
         basefilename, file_extension = os.path.splitext(filename)
-        return f'mediafiles/captains/{instance.operator.name.lower()}_{instance.name.lower()}{file_extension}'
-
+        return f"mediafiles/captains/{instance.operator.name.lower()}_{instance.name.lower()}{file_extension}"
 
     def rename_deckhand_boat_photo_path(instance, filename) -> str:
         basefilename, file_extension = os.path.splitext(filename)
-        return f'mediafiles/deckhands/{instance.operator.name.lower()}_{instance.name.lower()}{file_extension}'
-
+        return f"mediafiles/deckhands/{instance.operator.name.lower()}_{instance.name.lower()}{file_extension}"
 
     name = models.CharField(max_length=100)
     capacity = models.IntegerField()
@@ -75,12 +76,14 @@ class Boat(models.Model):
     def reviews(self):
         return Review.objects.filter(boat=self).order_by("created")
 
+    @property
+    def reviews_count(self):
+        return self.reviews.count()
 
 
 class Review(models.Model):
-
     class Meta:
-        ordering = ['-created']
+        ordering = ["-created"]
 
     reviewer_name = models.CharField(max_length=100)
     rating = models.IntegerField()
@@ -90,4 +93,3 @@ class Review(models.Model):
 
     def __str__(self):
         return self.name
-

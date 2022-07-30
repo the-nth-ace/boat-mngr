@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+<main id="main">
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+        <div class="container">
+            <div class="section-title boats-heading">
+                <div class="row section-title1">
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member ">
+                            <div class="member-info">
+                                <h4>{{ operator.name }}</h4>
+                                <span> <b>Contact: {{ operator.contact_info }}</b></span>
+                                <span> <b> Association: {{ operator.get_association_display }}</b> </span>
+                                <span> <b> Total Boats: {{ operator.boats }}</b> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for boat in noats %}
+                    <a href="{% url 'one_boat' boat.pk %}"
+                       class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member">
+                            <div class="member-img">
+                                <img src="{{ boat.captain_photo.url }}" class="img-fluid" alt="captain" />
+                            </div>
+                            <div class="member-info">
+                                <h4>{{ boat.name }}</h4>
+                                <span>{{ boat.captain_name }}</span>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- End Team Section -->
+</main>
+{% endblock content %}

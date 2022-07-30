@@ -1,38 +1,51 @@
-{% extends "base-tailwind.html" %}
-
+{% extends "base.html" %}
 {% block content %}
-
-<section class="text-gray-600 body-font">
-    <div class="container px-5 py-24 mx-auto">
-      <div class="flex flex-col text-center w-full mb-20">
-        <h1 class="text-2xl font-medium title-font mb-4 text-gray-900 tracking-widest">{{ boat.name }}</h1>
-        <a href="{% url 'business_detail' boat.business.pk %}"> <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{ boat.business.name }}</p> </a>
-      </div>
-      <div class="flex flex-wrap -m-4">
-        <div class="p-4 lg:w-1/2">
-          <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-            <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="{{ boat.captain_photo.url }}">
-            <!-- <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="/static/core/boats/{{ boat.captain_static_photo }}"> -->
-            <div class="flex-grow sm:pl-8">
-              <h2 class="title-font font-medium text-lg text-gray-900">{{boat.captain_name}}</h2>
-              <h3 class="text-gray-500 mb-3">Captain</h3>
-      
+  <main id="main">
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg ">
+      <div class="container ">
+        <div class="section-title boats-heading1">
+          <div class="row section-title1 boats-heading3">
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+              <div class="member">
+                <div class="member-info">
+                  <h4>{{ boat.name }}</h4>
+                  <span> <b>LASWA Approval: {{ boat.laswa_approval_date }}</b></span>
+                  <span> <b> NIWA Approval: {{ boat.niwa_approval_date }}</b> </span>
+                  <span> <b> Certification Status: {{ boat.certification_status }}</b> </span>
+                  <span> <b> Rating: {{ boat.reviews_count }}</b> </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="p-4 lg:w-1/2">
-          <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-            <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="/static/core/boats/{{ boat.deckhand_photo }}">
-            <div class="flex-grow sm:pl-8">
-              <h2 class="title-font font-medium text-lg text-gray-900">{{ boat.deckhand }}</h2>
-              <h3 class="text-gray-500 mb-3">Deckhand</h3>
-              
+        <div class="row boats-heading2">
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="{{ boat.captain_photo.url }}" class="img-fluid" alt="captain" />
+              </div>
+              <div class="member-info">
+                <h4>Captain</h4>
+                <span>{{ boat.captain_name }}</span>
+                <span>Certifications: {{ boat.captain_certification }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="{{ boat.deckhand_photo.url }}" class="img-fluid" alt="deckhand" />
+              </div>
+              <div class="member-info">
+                <h4>Deckhand</h4>
+                <span>A{{ boat.deckhand_name }}</span>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
-    </div>
-  </section>
-
+    </section>
+    <!-- End Team Section -->
+  </main>
 {% endblock content %}
