@@ -1,0 +1,56 @@
+{% extends "dashboard_base.html" %}
+{% load widget_tweaks %}
+{% block title %}
+  Add Review
+{% endblock title %}
+{% block content %}
+  <div class="py-4">
+    <h1 class="h4">Add New Review</h1>
+  </div>
+  <div class="row">
+    <div class="col-12 col-xl-12">
+      <div class="row">
+        <div class="col-12 mb-4">
+          <div class="card border-0 shadow components-section">
+            <div class="card-body">
+              <div class="row mb-4">
+                <form class="col-lg-12 col-sm-12"
+                      method="post"
+                      action="{% url 'dashboard_review_update' review.pk %}">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="reviewer_name">Reviewer Name</label>
+                    {% render_field form.reviewer_name class="form-control" %}
+                    {% if form.errors.reviewer_name %}<div class="invalid-feedback">{{ form.errors.reviewer_name }}</div>{% endif %}
+                  </div>
+                  <div class="mb-4">
+                    <label class="my-1 me-2" for="boat">Boat</label>
+                    {% render_field form.boat class="form-select" %}
+                    {% if form.errors.boat %}<div class="invalid-feedback">{{ form.errors.boat }}</div>{% endif %}
+                  </div>
+                  <div class="mb-3">
+                    <label for="rating">Rating</label>
+                    {% render_field form.rating class="form-control" %}
+                    {% if form.errors.rating %}<div class="invalid-feedback">{{ form.errors.rating }}</div>{% endif %}
+                  </div>
+                  <div class="mb-3">
+                    <label for="content">Content</label>
+                    <!-- <textarea class="form-control {% if form.errors.content %}is-invalid{% endif %}"
+           placeholder="Enter your review..."
+           id="content"
+           name="content"
+           rows="4"></textarea> -->
+                    {% render_field form.content class="form-control" rows="4" %}
+                    {% if form.errors.content %}<div class="invalid-feedback">{{ form.errors.content }}</div>{% endif %}
+                  </div>
+                  <button class="btn btn-gray-800 d-inline-flex align-items-center me-2"
+                          type="submit">Update Review</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

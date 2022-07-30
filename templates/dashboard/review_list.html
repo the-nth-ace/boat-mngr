@@ -1,0 +1,70 @@
+{% extends "dashboard_base.html" %}
+{% block title %}
+    All Reviews
+{% endblock title %}
+{% block content %}
+    <div class="py-4">
+        <a href="{% url 'dashboard_review_add' %}"
+           class="btn btn-gray-800 d-inline-flex align-items-center me-2">
+            <svg class="icon icon-xs me-2"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            New Review
+        </a>
+    </div>
+    <div class="col-12 col-xl-12">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card border-0 shadow">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h2 class="fs-5 fw-bold mb-0">Reviews</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="border-bottom" scope="col">Reviewer</th>
+                                    <th class="border-bottom" scope="col">Boat Name</th>
+                                    <th class="border-bottom" scope="col">Rating</th>
+                                    <th class="border-bottom" scope="col">Date Time</th>
+                                    <th class="border-bottom" scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for review in reviews %}
+                                    <tr>
+                                        <td class="fw-bolder text-gray-500" scope="row">{{ review.boat.name }}</td>
+                                        <td class="fw-bolder text-gray-500">{{ review.reviewer_name }}</td>
+                                        <td class="fw-bolder text-gray-500">{{ review.rating }}</td>
+                                        <td class="fw-bolder text-gray-500">{{ review.created }}</td>
+                                        <td>
+                                            <a href="{% url 'dashboard_review_detail' review.pk %}">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     class="icon icon-sm"
+                                                     viewBox="0 0 24 24"
+                                                     fill="currentColor">
+                                                    <path
+                                                    d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                                    <path
+                                                    d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

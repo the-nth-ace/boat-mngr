@@ -1,10 +1,10 @@
-{% extends 'dashboard_base.html' %}
+mo{% extends 'dashboard_base.html' %}
 {% block title %}
     All Businesses
 {% endblock title %}
 {% block content %}
-    <div class="py-4">
-        <a href="{% url 'dashboard_business_add' %}"
+<div class="py-4">
+        <a href="{% url 'dashboard_operator_add' %}"
            class="btn btn-gray-800 d-inline-flex align-items-center me-2">
             <svg class="icon icon-xs me-2"
                  fill="none"
@@ -13,10 +13,10 @@
                  xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
-            New Business
+            New Operator
         </a>
-    </div>
-    <div class="row">
+</div>
+<div class="row">
         <div class="col-12 col-xl-12">
             <div class="row">
                 <div class="col-12 mb-4">
@@ -24,7 +24,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h2 class="fs-5 fw-bold mb-0">Businesses</h2>
+                                    <h2 class="fs-5 fw-bold mb-0">Operators</h2>
                                 </div>
                             </div>
                         </div>
@@ -32,19 +32,21 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th class="border-bottom" scope="col">Business name</th>
+                                        <th class="border-bottom" scope="col">Operator name</th>
+                                        <th class="border-bottom" scope="col">Associaiton</th>
                                         <th class="border-bottom" scope="col">Boats</th>
-                                        <th class="border-bottom" scope="col">Owner</th>
+                                        <th class="border-bottom" scope="col">Contact</th>
                                         <th class="border-bottom" scope="col">Average Rating</th>
                                         <th class="border-bottom" scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for business in businesses %}
+                                    {% for operator in operators %}
                                         <tr>
-                                            <th class="text-gray-900" scope="row">{{ business.name }}</th>
-                                            <td class="fw-bolder text-gray-500">{{ business.boats }}</td>
-                                            <td class="fw-bolder text-gray-500">{{ business.owner }}</td>
+                                            <th class="text-gray-900" scope="row">{{ operator.name }}</th>
+                                            <th class="text-gray-900" scope="row">{{ operator.get_association_display }}</th>
+                                            <td class="fw-bolder text-gray-500">{{ operator.boats }}</td>
+                                            <td class="fw-bolder text-gray-500">{{ operator.contact_info }}</td>
                                             <td class="fw-bolder text-gray-500">
                                                 <div class="d-flex">
                                                     <svg class="icon icon-xs text-danger me-2"
@@ -55,11 +57,11 @@
                                                         d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
                                                         clip-rule="evenodd" />
                                                     </svg>
-                                                    {{ business.average_rating }}
+                                                    {{ operator.average_rating }}
                                                 </div>
                                             </td>
                                             <td>
-                                                <a href="{% url 'dashboard_business_detail' business.pk %}">
+                                                <a href="{% url 'dashboard_operator_detail' operator.pk %}">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                          class="icon icon-sm"
                                                          viewBox="0 0 24 24"
@@ -80,5 +82,5 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>
 {% endblock content %}

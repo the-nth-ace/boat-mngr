@@ -1,21 +1,12 @@
-import imp
-from django.shortcuts import get_list_or_404, get_object_or_404, render
-from core.services import get_user_by_username
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import AbstractBaseUser
+from django.urls import reverse
 from core.models import Boat, Operator, Review
 
 
-# TODO
-
-## Homepage
 def homepage(request):
     return render(request, "customer/home.html")
-
-
-def dashboard(request):
-    return render(request, "dashboard/dashboard.html", context={"active": "dashboard"})
 
 
 def one_boat_page(request, pk):
@@ -42,20 +33,27 @@ def one_business(request, pk):
 
 
 def login_page(request):
+
+    if request.user.is_authenticated:
+        return redirect(reverse("dashboard"))
+
+    context = {"error": False}
     if request.method == "POST":
         username: str = request.POST["username"]
         password: str = request.POST["password"]
-        user: User | None = authenticate(username=username, password=password)
-        # Todo
+        user: AbstractBaseUser | None = authenticate(
+            username=username, password=password
+        )
         if user is not None:
             login(request, user)
-            if user.is_staff:
-                print("Redirect to admin")
-            else:
-                print("Redirect to owner dashboard")
+            return redirect(reverse("dashboard"))
         else:
-            print("Error occurred!")
+            context = {"error": True}
+            return render(request, "main/login.html", context)
 
-        # Authenticate user here
+    return render(request, "main/login.html", context)
 
-    return render(request, "main/login.html")
+
+def logout_page(request):
+    logout(request)
+    return redirect(reverse("homepage"))
