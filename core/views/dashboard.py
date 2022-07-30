@@ -1,14 +1,17 @@
 from typing import Any, Dict, Optional
-from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import AnonymousUser, AbstractBaseUser
+from django.contrib.auth.models import User
+from django.contrib import messages
 from core.models import Boat, Operator, Review
+from core.forms import ChangePasswordForm
 
 
+@login_required
 def dashboard(request):
     boats_count = Boat.objects.all().count()
     operators_count = Operator.objects.all().count()
@@ -49,6 +52,10 @@ class OperatorCreateView(OperatorViewSetup, CreateView):
         context["active"] = "operators"
         return context
 
+    def form_valid(self, form):
+        messages.success(self.request, "Operator added")
+        return super().form_valid(form)
+
 
 class OperatorUpdateView(OperatorViewSetup, UpdateView):
     fields = ["name", "contact_info", "operation_commenced", "association"]
@@ -58,6 +65,10 @@ class OperatorUpdateView(OperatorViewSetup, UpdateView):
         context = super().get_context_data(**kwargs)
         context["active"] = "operators"
         return context
+
+    def form_valid(self, form):
+        messages.success(self.request, "Operator updated")
+        return super().form_valid(form)
 
 
 class OperatorDetailView(OperatorViewSetup, DetailView):
@@ -74,6 +85,7 @@ class OperatorDetailView(OperatorViewSetup, DetailView):
 def delete_operator(request, pk):
     operator = get_object_or_404(Operator, pk=pk)
     operator.delete()
+    messages.error(request, "Operator deleted")
     return redirect(reverse("dashboard_operator_list"))
 
 
@@ -113,9 +125,9 @@ class BoatCreateView(BoatViewSetup, CreateView):
         context["active"] = "boats"
         return context
 
-    def form_invalid(self, form):
-        print(form.errors.as_json())
-        return super().form_invalid(form)
+    def form_valid(self, form):
+        messages.success(self.request, "Boat added")
+        return super().form_valid(form)
 
 
 class BoatDetailView(BoatViewSetup, DetailView):
@@ -148,6 +160,10 @@ class BoatUpdateView(BoatViewSetup, UpdateView):
         context = super().get_context_data(**kwargs)
         context["active"] = "boats"
         return context
+
+    def form_valid(self, form):
+        messages.success(self.request, "Boat updated")
+        return super().form_valid(form)
 
 
 @login_required
@@ -185,6 +201,10 @@ class ReviewCreateView(ReviewViewSetup, CreateView):
         print(form.errors.as_json())
         return super().form_invalid(form)
 
+    def form_valid(self, form):
+        messages.success(self.request, "Review added")
+        return super().form_valid(form)
+
 
 class ReviewDetailView(ReviewViewSetup, DetailView):
     context_object_name: Optional[str] = "review"
@@ -205,6 +225,10 @@ class ReviewUpdateView(ReviewViewSetup, UpdateView):
         context["active"] = "reviews"
         return context
 
+    def form_valid(self, form):
+        messages.success(self.request, "Review updated")
+        return super().form_valid(form)
+
 
 @login_required
 def delete_review(request, pk):
@@ -218,9 +242,28 @@ def delete_review(request, pk):
 
 @login_required
 def change_password(request):
-    user: AbstractBaseUser | AnonymousUser = request.user
-    if request.method == "post":
-        # Do change
-        return redirect(reverse("dashboard_settings"))
+    user = request.user
+    form = ChangePasswordForm()
+    context = {"form": form, "active": "settings"}
+    if request.method == "POST":
+        form = ChangePasswordForm(request.POST)
+        old_password = form.data["old_password"]
+        user_temp = authenticate(username=user.username, password=old_password)
 
-    return render(request, "dashboard/change_password.html")
+        if user_temp is None:
+            form.add_error("old_password", "Wrong password")
+            context["form"] = form
+            return render(request, "dashboard/change_password.html", context)
+
+        if form.is_valid():
+            new_password = form.cleaned_data["new_password_confirm"]
+            user_temp.set_password(new_password)
+            user_temp.save()
+            messages.success(request, "Password updated. Please log in again")
+            return redirect(reverse("dashboard"))
+
+        else:
+            context["form"] = form
+            return render(request, "dashboard/change_password.html", context)
+
+    return render(request, "dashboard/change_password.html", context)

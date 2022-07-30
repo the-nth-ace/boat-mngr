@@ -33,6 +33,10 @@ def one_business(request, pk):
 
 
 def login_page(request):
+
+    if request.user.is_authenticated:
+        return redirect(reverse("dashboard"))
+
     context = {"error": False}
     if request.method == "POST":
         username: str = request.POST["username"]

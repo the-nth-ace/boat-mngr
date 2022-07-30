@@ -17,6 +17,7 @@ urlpatterns = [
 # SECTION Dashboard Views
 
 # SECTION Businesses vIEWS
+
 urlpatterns += [
     path("dashboard/", dashboard.dashboard, name="dashboard"),
     path(
@@ -112,4 +113,11 @@ urlpatterns += [
 # !SECTION
 
 
+# SECTION Change Password
+
+urlpatterns += [
+    path("dashboard/settings/", dashboard.change_password, name="dashboard_settings")
+]
+
+# !SECTION
 # !SECTION
