@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import AbstractBaseUser
 from django.urls import reverse
 from core.models import Boat, Operator, Review
 
@@ -38,8 +37,9 @@ def login_page(request):
     if request.method == "POST":
         username: str = request.POST["username"]
         password: str = request.POST["password"]
-        user: User | None = authenticate(username=username, password=password)
-        # Todo
+        user: AbstractBaseUser | None = authenticate(
+            username=username, password=password
+        )
         if user is not None:
             login(request, user)
             return redirect(reverse("dashboard"))
@@ -47,6 +47,9 @@ def login_page(request):
             context = {"error": True}
             return render(request, "main/login.html", context)
 
-        # Authenticate user here
-
     return render(request, "main/login.html", context)
+
+
+def logout_page(request):
+    logout(request)
+    return redirect(reverse("homepage"))

@@ -1,15 +1,31 @@
 from typing import Any, Dict, Optional
+from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser, AbstractBaseUser
 from core.models import Boat, Operator, Review
 
 
 def dashboard(request):
-    return render(request, "dashboard/dashboard.html", context={"active": "dashboard"})
+    boats_count = Boat.objects.all().count()
+    operators_count = Operator.objects.all().count()
+    reviews = Review.objects.all()
+    reviews_count = reviews.count()
+    reviews = reviews[:5]
+    context = {
+        "boats_count": boats_count,
+        "operators_count": operators_count,
+        "reviews_count": reviews_count,
+        "reviews": reviews,
+        "active": "dashboard",
+    }
+    return render(request, "dashboard/dashboard.html", context)
 
 
-class OperatorViewSetup:
+class OperatorViewSetup(LoginRequiredMixin):
     model = Operator
     success_url = reverse_lazy("dashboard_operator_list")
 
@@ -54,13 +70,14 @@ class OperatorDetailView(OperatorViewSetup, DetailView):
         return context
 
 
+@login_required
 def delete_operator(request, pk):
-    Operator = get_object_or_404(Operator, pk=pk)
-    Operator.delete()
+    operator = get_object_or_404(Operator, pk=pk)
+    operator.delete()
     return redirect(reverse("dashboard_operator_list"))
 
 
-class BoatViewSetup:
+class BoatViewSetup(LoginRequiredMixin):
     model = Boat
     success_url = reverse_lazy("dashboard_boat_list")
 
@@ -133,13 +150,14 @@ class BoatUpdateView(BoatViewSetup, UpdateView):
         return context
 
 
+@login_required
 def delete_boat(request, pk):
     boat = get_object_or_404(Boat, pk=pk)
     boat.delete()
     return redirect(reverse("dashboard_boat_list"))
 
 
-class ReviewViewSetup:
+class ReviewViewSetup(LoginRequiredMixin):
     model = Review
     success_url = reverse_lazy("dashboard_review_list")
 
@@ -188,7 +206,21 @@ class ReviewUpdateView(ReviewViewSetup, UpdateView):
         return context
 
 
+@login_required
 def delete_review(request, pk):
     review = get_object_or_404(Review, pk=pk)
     review.delete()
     return redirect(reverse("dashboard_view_list"))
+
+
+# TODO Change Password View
+
+
+@login_required
+def change_password(request):
+    user: AbstractBaseUser | AnonymousUser = request.user
+    if request.method == "post":
+        # Do change
+        return redirect(reverse("dashboard_settings"))
+
+    return render(request, "dashboard/change_password.html")

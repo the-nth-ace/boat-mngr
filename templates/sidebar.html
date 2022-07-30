@@ -33,7 +33,7 @@
                 </div>
                 <div class="d-block">
                     <h2 class="h5 mb-3">Hi, Jane</h2>
-                    <a href="../../pages/examples/sign-in.html"
+                    <a href="{% url 'logout' %}"
                        class="btn btn-secondary btn-sm d-inline-flex align-items-center">
                         <svg class="icon icon-xxs me-1"
                              fill="none"
@@ -147,7 +147,7 @@
                     </span>
                 </a>
             </li>
-            <li class="nav-item              {% if active == 'settings' %} active{% endif %}">
+            <li class="nav-item {% if active == 'settings' %} active{% endif %}">
                 <a href="../../pages/settings.html" class="nav-link">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2"
@@ -165,7 +165,7 @@
             </li>
             <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
             <li class="nav-item">
-                <a href="../../pages/upgrade-to-pro.html"
+                <a href="{% url 'homepage' %}"
                    class="btn btn-secondary d-flex align-items-center justify-content-center btn-upgrade-pro">
                     <span class="sidebar-icon d-inline-flex align-items-center justify-content-center">
                         <svg class="icon icon-xs me-2"
@@ -178,7 +178,7 @@
                             </path>
                         </svg>
                     </span>
-                    <span>Upgrade to Pro</span>
+                    <span>Homepage</span>
                 </a>
             </li>
         </ul>

@@ -2,19 +2,21 @@ from django.urls import path
 from core.views import dashboard, main
 
 
-# Main Views
+# SECTION Main views
 urlpatterns = [
     path("", main.homepage, name="homepage"),
-    path("businesses", main.business_list_page, name="business_list"),
+    path("businesses/", main.business_list_page, name="business_list"),
     path("businesses/<int:pk>/", main.one_business, name="business_detail"),
     path("login/", main.login_page, name="login_page"),
+    path("logout/", main.logout_page, name="logout_page"),
     path("boat/<int:pk>/", main.one_boat_page, name="one_boat"),
 ]
+# !SECTION
 
 
-# Dashboard Views
+# SECTION Dashboard Views
 
-# ! Businesses
+# SECTION Businesses vIEWS
 urlpatterns += [
     path("dashboard/", dashboard.dashboard, name="dashboard"),
     path(
@@ -44,8 +46,10 @@ urlpatterns += [
     ),
 ]
 
+# !SECTION
 
-# ! Boats
+
+# SECTION Boats
 urlpatterns += [
     path(
         "dashboard/boats/",
@@ -74,7 +78,9 @@ urlpatterns += [
     ),
 ]
 
-# ! Reviews
+# !SECTION
+
+# SECTION Reviews
 urlpatterns += [
     path(
         "dashboard/reviews/",
@@ -103,4 +109,7 @@ urlpatterns += [
     ),
 ]
 
-# Reviews View
+# !SECTION
+
+
+# !SECTION
