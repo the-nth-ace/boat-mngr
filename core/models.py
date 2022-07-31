@@ -92,4 +92,4 @@ class Review(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return self.reviewer_name

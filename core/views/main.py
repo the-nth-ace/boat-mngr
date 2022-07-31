@@ -16,15 +16,21 @@ def one_boat_page(request, pk):
     return render(request, "customer/boat_detail.html", context)
 
 
-def business_list_page(request):
-    operatores = Operator.objects.all()
-    context = {"operators": operatores}
-    return render(request, "customer/Operator_list.html", context)
+def operator_list_page(request, association):
+    associations = {
+        "atbowaton": Operator.AssociationChoices.ATBOWATON,
+        "ufta": Operator.AssociationChoices.UFTA,
+        "iboa": Operator.AssociationChoices.IBOA,
+    }
+    association_filter = associations[association]
+    operators = Operator.objects.filter(association=association_filter)
+    context = {"operators": operators, "association": association_filter.name}
+    return render(request, "customer/operator_list.html", context)
 
 
-def one_business(request, pk):
+def one_operator(request, pk):
     operator = get_object_or_404(Operator, pk=pk)
-    boats = Boat.objects.filter(operator=Operator)
+    boats = Boat.objects.filter(operator=operator)
     context = {"operator": operator, "boats": boats}
     return render(request, "customer/operator_detail.html", context)
 
