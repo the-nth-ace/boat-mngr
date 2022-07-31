@@ -3,19 +3,7 @@
     All Reviews
 {% endblock title %}
 {% block content %}
-    <div class="py-4">
-        <a href="{% url 'dashboard_review_add' %}"
-           class="btn btn-gray-800 d-inline-flex align-items-center me-2">
-            <svg class="icon icon-xs me-2"
-                 fill="none"
-                 stroke="currentColor"
-                 viewBox="0 0 24 24"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            New Review
-        </a>
-    </div>
+    <div class="py-4"></div>
     <div class="col-12 col-xl-12">
         <div class="row">
             <div class="col-12 mb-4">
@@ -31,10 +19,10 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th class="border-bottom" scope="col">Reviewer</th>
                                     <th class="border-bottom" scope="col">Boat Name</th>
+                                    <th class="border-bottom" scope="col">Reviewer</th>
                                     <th class="border-bottom" scope="col">Rating</th>
-                                    <th class="border-bottom" scope="col">Date Time</th>
+                                    <th class="border-bottom" scope="col">Date</th>
                                     <th class="border-bottom" scope="col">Action</th>
                                 </tr>
                             </thead>

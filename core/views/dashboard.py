@@ -54,7 +54,7 @@ class OperatorCreateView(OperatorViewSetup, CreateView):
 
     def form_valid(self, form):
         messages.success(self.request, "Operator added")
-        return super().form_valid(form)
+        return super(OperatorCreateView, self).form_valid(form)
 
 
 class OperatorUpdateView(OperatorViewSetup, UpdateView):
@@ -68,7 +68,7 @@ class OperatorUpdateView(OperatorViewSetup, UpdateView):
 
     def form_valid(self, form):
         messages.success(self.request, "Operator updated")
-        return super().form_valid(form)
+        return super(OperatorUpdateView, self).form_valid(form)
 
 
 class OperatorDetailView(OperatorViewSetup, DetailView):
@@ -127,7 +127,7 @@ class BoatCreateView(BoatViewSetup, CreateView):
 
     def form_valid(self, form):
         messages.success(self.request, "Boat added")
-        return super().form_valid(form)
+        return super(BoatCreateView, self).form_valid(form)
 
 
 class BoatDetailView(BoatViewSetup, DetailView):
@@ -163,7 +163,7 @@ class BoatUpdateView(BoatViewSetup, UpdateView):
 
     def form_valid(self, form):
         messages.success(self.request, "Boat updated")
-        return super().form_valid(form)
+        return super(BoatUpdateView, self).form_valid(form)
 
 
 @login_required
@@ -203,7 +203,7 @@ class ReviewCreateView(ReviewViewSetup, CreateView):
 
     def form_valid(self, form):
         messages.success(self.request, "Review added")
-        return super().form_valid(form)
+        return super(ReviewCreateView, self).form_valid(form)
 
 
 class ReviewDetailView(ReviewViewSetup, DetailView):
@@ -227,7 +227,7 @@ class ReviewUpdateView(ReviewViewSetup, UpdateView):
 
     def form_valid(self, form):
         messages.success(self.request, "Review updated")
-        return super().form_valid(form)
+        return super(ReviewUpdateView, self).form_valid(form)
 
 
 @login_required

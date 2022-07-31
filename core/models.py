@@ -80,6 +80,10 @@ class Boat(models.Model):
     def reviews_count(self):
         return self.reviews.count()
 
+    # average rating
+
+    # review summary
+
 
 class Review(models.Model):
     class Meta:

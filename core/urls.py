@@ -90,11 +90,6 @@ urlpatterns += [
         name="dashboard_review_list",
     ),
     path(
-        "dashboard/reviews/add/",
-        dashboard.ReviewCreateView.as_view(),
-        name="dashboard_review_add",
-    ),
-    path(
         "dashboard/reviews/<int:pk>/",
         dashboard.ReviewDetailView.as_view(),
         name="dashboard_review_detail",
@@ -103,11 +98,6 @@ urlpatterns += [
         "dashboard/reviews/<int:pk>/delete/",
         dashboard.delete_review,
         name="dashboard_review_delete",
-    ),
-    path(
-        "dashboard/reviews/<int:pk>/update/",
-        dashboard.ReviewUpdateView.as_view(),
-        name="dashboard_review_update",
     ),
 ]
 
