@@ -11,6 +11,13 @@ def homepage(request):
 
 def one_boat_page(request, pk):
     boat = get_object_or_404(Boat, pk=pk)
+    if request.method == "POST":
+        content = request.POST.get("content")
+        review = Review.objects.create(reviewer_name="Anonymous", rating=5, content=content, boat=boat)
+        review.save()
+        return redirect(reverse('one_boat', kwargs={'pk': boat.pk}))
+
+
     reviews = Review.objects.filter(boat=boat)
     context = {"boat": boat, "reviews": reviews}
     return render(request, "customer/boat_detail.html", context)

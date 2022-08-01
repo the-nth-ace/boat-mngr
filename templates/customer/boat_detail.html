@@ -47,7 +47,7 @@
               </div>
               <div class="member-info">
                 <h4>Deckhand</h4>
-                <span>A{{ boat.deckhand_name }}</span>
+                <span>{{ boat.deckhand_name }}</span>
               </div>
             </div>
           </div>
@@ -59,25 +59,18 @@
       <div class="container my-5 py-5 text-area">
         <div class="row d-flex justify-content-center text-area">
           <div class="col-md-12 col-lg-10 col-xl-8">
-            <div class="card">
+            <form class="card" action="{% url 'one_boat' boat.pk %}" method="post">
+              {% csrf_token %}
               <div class="card-footer py-3 border-0">
                 <div class="d-flex flex-start w-100">
                   <div class="form-outline w-100">
-                    <textarea class="form-control" id="textAreaExample" placeholder="Have a comment?" rows="4"
+                    <textarea class="form-control" id="textAreaExample" placeholder="Have a comment?" rows="4" name="content"
                       style="background: #fff;"></textarea>
                   </div>
                 </div>
-                <!-- <div class="rating">
-
-                  <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
-                  <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
-                  <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
-                  <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
-                  <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-                </div> -->
                 
                 <div class="float-end mt-2 pt-1">
-                  <button type="button" class="btn btn-secondary btn-sm">
+                  <button type="submit" class="btn btn-secondary btn-sm">
                     Post comment
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm">
@@ -85,7 +78,7 @@
                   </button>
                 </div>
               </div>
-            </div>
+            </form>            
           </div>
         </div>
       </div>
@@ -94,10 +87,11 @@
     <div class="review-list">
         <ul>
             <li>
+              {% for review in reviews %}
                 <div class="d-flex d-flex1">
                     
                     <div class="right">
-                        <h4>
+                        <!-- <h4>
                             Askbootstrap
                             <span class="gig-rating text-body-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="15" height="15">
@@ -108,77 +102,24 @@
                                 </svg>
                                 5.0
                             </span>
-                        </h4>
+                        </h4> -->
                         <div class="country d-flex align-items-center">
-                            <span>
+                            <!-- <span>
                                 <img class="country-flag img-fluid" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
                             </span>
-                            <div class="country-name font-accent">India</div>
+                            <div class="country-name font-accent">India</div> -->
                         </div>
                         <div class="review-description">
                             <p>
-                                The process was smooth, after providing the required info, Pragyesh sent me an outstanding packet of wireframes. Thank you a lot!
+                              {{ review.content }}
                             </p>
                         </div>
-                        <span class="publish py-3 d-inline-block w-100">Published 4 weeks ago</span>
+                        <span class="publish py-3 d-inline-block w-100">Published {{review.created}}</span>
                         
                     </div>
-                    <div class="right">
-                      <h4>
-                          Askbootstrap
-                          <span class="gig-rating text-body-2">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="15" height="15">
-                                  <path
-                                      fill="currentColor"
-                                      d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
-                                  ></path>
-                              </svg>
-                              5.0
-                          </span>
-                      </h4>
-                      <div class="country d-flex align-items-center">
-                          <span>
-                              <img class="country-flag img-fluid" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
-                          </span>
-                          <div class="country-name font-accent">India</div>
-                      </div>
-                      <div class="review-description">
-                          <p>
-                              The process was smooth, after providing the required info, Pragyesh sent me an outstanding packet of wireframes. Thank you a lot!
-                          </p>
-                      </div>
-                      <span class="publish py-3 d-inline-block w-100">Published 4 weeks ago</span>
-                      
-                  </div>
-                  <div class="right">
-                    <h4>
-                        Askbootstrap
-                        <span class="gig-rating text-body-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="15" height="15">
-                                <path
-                                    fill="currentColor"
-                                    d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
-                                ></path>
-                            </svg>
-                            5.0
-                        </span>
-                    </h4>
-                    <div class="country d-flex align-items-center">
-                        <span>
-                            <img class="country-flag img-fluid" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
-                        </span>
-                        <div class="country-name font-accent">India</div>
-                    </div>
-                    <div class="review-description">
-                        <p>
-                            The process was smooth, after providing the required info, Pragyesh sent me an outstanding packet of wireframes. Thank you a lot!
-                        </p>
-                    </div>
-                    <span class="publish py-3 d-inline-block w-100">Published 4 weeks ago</span>
-                    
-                </div>
                 </div>
             </li>
+            {% endfor %}
         </ul>
     </div>
 </div>
