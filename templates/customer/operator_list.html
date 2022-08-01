@@ -6,11 +6,10 @@
       <div class="container ">
         <div class="section-title">
           
-          <h3>ATBOWATON<span></span></h3>
+          <h3>{{acronym}}<span></span></h3>
           <br />
           <h2>
-            The Association of Tourist Boat Operators and Water Transporters
-            of Nigeria
+            {{name}}
           </h2>
         </div>
 
@@ -28,53 +27,19 @@
                           <tr>
                             <th scope="col">OPERATOR NAME</th>
                             <th scope="col">CONTACT</th>
-                            <!-- <th scope="col">ASSOCIATION</th> -->
+                            <th scope="col">YEAR COMMENCED</th>
                             <th scope="col">TOTAL BOATS</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr class="table-row" onclick="location.href='#'">
-                            <th scope="row" style="color: #666666;">Tiger Nixon</th>
-                            <td>System Architect</td>
-                            <!-- <td>tnixon12@example.com</td> -->
-                            <td>61</td>
+                            {% for operator in operators %}
+                          <tr class="table-row" onclick="location.href='/operators/{{ operator.pk }}'">
+                            <th scope="row" style="color: #666666;">{{operator.name}}</th>
+                            <td>{{operator.contact_info}}</td>
+                            <td>{{operator.operation_commenced}}</td>
+                            <td>{{operator.boats}}</td>
                           </tr>
-                          <tr class="table-row" onclick="location.href='#'">
-                            <th scope="row" style="color: #666666;">Sonya Frost</th>
-                            <td>Software Engineer</td>
-                            <!-- <td>sfrost34@example.com</td> -->
-                            <td>23</td>
-                          </tr>
-                          <tr class="table-row" onclick="location.href='#'">
-                            <th scope="row" style="color: #666666;">Jena Gaines</th>
-                            <td>Office Manager</td>
-                            <!-- <td>jgaines75@example.com</td> -->
-                            <td>30</td>
-                          </tr>
-                          <tr class="table-row" onclick="location.href='#'">
-                            <th scope="row" style="color: #666666;">Quinn Flynn</th>
-                            <td>Support Lead</td>
-                            <!-- <td>qflyn09@example.com</td> -->
-                            <td>22</td>
-                          </tr>
-                          <tr class="table-row" onclick="location.href='#'">
-                            <th scope="row" style="color: #666666;">Charde Marshall</th>
-                            <td>Regional Director</td>
-                            <!-- <td>cmarshall28@example.com</td> -->
-                            <td>36</td>
-                          </tr>
-                          <tr class="table-row" onclick="location.href='#'">
-                            <th scope="row" style="color: #666666;">Haley Kennedy</th>
-                            <td>Senior Marketing Designer</td>
-                            <!-- <td>hkennedy63@example.com</td> -->
-                            <td>43</td>
-                          </tr>
-                          <tr class="table-row" onclick="location.href='#'">
-                            <th scope="row" style="color: #666666;">Tatyana Fitzpatrick</th>
-                            <td>Regional Director</td>
-                            <!-- <td>tfitzpatrick00@example.com</td> -->
-                            <td>19</td>
-                          </tr>
+                          {% endfor %}
                         </tbody>
                       </table>
                     </div>

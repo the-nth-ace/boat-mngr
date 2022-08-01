@@ -18,17 +18,20 @@ def one_boat_page(request, pk):
 
 def operator_list_page(request, association):
     associations = {
-        "atbowaton": Operator.AssociationChoices.ATBOWATON,
-        "ufta": Operator.AssociationChoices.UFTA,
-        "iboa": Operator.AssociationChoices.IBOA,
+        "atbowaton": {"acronym": "ATBOWATON", "name": "THE ASSOCIATION OF TOURIST BOAT OPERATORS AND WATER TRANSPORTERS OF NIGERIA", "model": "atbo"},
+        "ufta": {"acronym": "UFTA", "name": "UNITED FERRY TRANSPORTERS' ASSOCIATION", "model": "ufta"},
+        "iboa": {"acronym": "IBOA", "name": "INTEGRATED BOAT OPERATORS ASSOCIATION", "model": "iboa"},
+
     }
-    association_filter = associations[association]
-    operators = Operator.objects.filter(association=association_filter)
-    context = {"operators": operators, "association": association_filter.name}
+    association_desc = associations[association]
+    name = association_desc["name"]
+    acronym = association_desc["acronym"]
+    operators = Operator.objects.filter(association=association_desc["model"])
+    context = {"operators": operators, "name": name, "acronym": acronym}
     return render(request, "customer/operator_list.html", context)
 
 
-def one_operator(request, pk):
+def operator_detail(request, pk):
     operator = get_object_or_404(Operator, pk=pk)
     boats = Boat.objects.filter(operator=operator)
     context = {"operator": operator, "boats": boats}

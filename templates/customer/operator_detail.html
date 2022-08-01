@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block content %}
 <main id="main">
     <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
@@ -18,7 +19,7 @@
                 </div>
             </div>
             <div class="row">
-                {% for boat in noats %}
+                {% for boat in boats %}
                     <a href="{% url 'one_boat' boat.pk %}"
                        class="col-lg-3 col-md-6 d-flex align-items-stretch">
                         <div class="member">
