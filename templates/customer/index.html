@@ -11,8 +11,15 @@
             </h1>
             <h2>All Ikorodu boat owners' associations in one place; free to access and easy to use.</h2>
             <div class="d-flex">
-                <a href="business_list.html" class="btn-get-started scrollto">Boat Associations</a>
-                <!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
+                <a href="{% url 'operator_list' 'atbowaton' %}" class="btn-get-started scrollto">ATBOWATON</a>
+            </div>
+            <br>
+            <div class="d-flex">
+                <a href="{% url 'operator_list' 'iboa' %}" class="btn-get-started scrollto">IBOA</a>
+            </div>
+            <br>
+            <div class="d-flex">
+                <a href="{% url 'operator_list' 'ufta' %}" class="btn-get-started scrollto">UFTA</a>
             </div>
         </div>
     </section>
