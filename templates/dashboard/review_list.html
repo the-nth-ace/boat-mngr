@@ -17,11 +17,9 @@
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
+                            <thead class="thead-light" id="dataTable">
                                 <tr>
                                     <th class="border-bottom" scope="col">Boat Name</th>
-                                    <th class="border-bottom" scope="col">Reviewer</th>
-                                    <th class="border-bottom" scope="col">Rating</th>
                                     <th class="border-bottom" scope="col">Date</th>
                                     <th class="border-bottom" scope="col">Action</th>
                                 </tr>
@@ -30,8 +28,6 @@
                                 {% for review in reviews %}
                                     <tr>
                                         <td class="fw-bolder text-gray-500" scope="row">{{ review.boat.name }}</td>
-                                        <td class="fw-bolder text-gray-500">{{ review.reviewer_name }}</td>
-                                        <td class="fw-bolder text-gray-500">{{ review.rating }}</td>
                                         <td class="fw-bolder text-gray-500">{{ review.created }}</td>
                                         <td>
                                             <a href="{% url 'dashboard_review_detail' review.pk %}">

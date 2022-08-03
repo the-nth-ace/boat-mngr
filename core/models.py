@@ -4,6 +4,9 @@ from django.urls import reverse
 
 
 class Operator(models.Model):
+    class Meta:
+        ordering = ["name"]
+
     class AssociationChoices(models.TextChoices):
         ATBOWATON = (
             "atbo",
@@ -48,6 +51,7 @@ class Operator(models.Model):
 class Boat(models.Model):
     class Meta:
         unique_together = ["name", "operator"]
+        ordering = ["name"]
 
     def rename_captain_boat_photo_path(instance, filename) -> str:
         basefilename, file_extension = os.path.splitext(filename)
@@ -80,20 +84,14 @@ class Boat(models.Model):
     def reviews_count(self):
         return self.reviews.count()
 
-    # average rating
-
-    # review summary
-
 
 class Review(models.Model):
     class Meta:
         ordering = ["-created"]
 
-    reviewer_name = models.CharField(max_length=100)
-    rating = models.IntegerField()
     content = models.TextField()
     boat = models.ForeignKey(Boat, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.reviewer_name
+        return f"{self.boat.name} {self.created}"

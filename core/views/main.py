@@ -13,10 +13,9 @@ def one_boat_page(request, pk):
     boat = get_object_or_404(Boat, pk=pk)
     if request.method == "POST":
         content = request.POST.get("content")
-        review = Review.objects.create(reviewer_name="Anonymous", rating=5, content=content, boat=boat)
+        review = Review.objects.create(content=content, boat=boat)
         review.save()
-        return redirect(reverse('one_boat', kwargs={'pk': boat.pk}))
-
+        return redirect(reverse("one_boat", kwargs={"pk": boat.pk}))
 
     reviews = Review.objects.filter(boat=boat)
     context = {"boat": boat, "reviews": reviews}
@@ -25,10 +24,21 @@ def one_boat_page(request, pk):
 
 def operator_list_page(request, association):
     associations = {
-        "atbowaton": {"acronym": "ATBOWATON", "name": "THE ASSOCIATION OF TOURIST BOAT OPERATORS AND WATER TRANSPORTERS OF NIGERIA", "model": "atbo"},
-        "ufta": {"acronym": "UFTA", "name": "UNITED FERRY TRANSPORTERS' ASSOCIATION", "model": "ufta"},
-        "iboa": {"acronym": "IBOA", "name": "INTEGRATED BOAT OPERATORS ASSOCIATION", "model": "iboa"},
-
+        "atbowaton": {
+            "acronym": "ATBOWATON",
+            "name": "THE ASSOCIATION OF TOURIST BOAT OPERATORS AND WATER TRANSPORTERS OF NIGERIA",
+            "model": "atbo",
+        },
+        "ufta": {
+            "acronym": "UFTA",
+            "name": "UNITED FERRY TRANSPORTERS' ASSOCIATION",
+            "model": "ufta",
+        },
+        "iboa": {
+            "acronym": "IBOA",
+            "name": "INTEGRATED BOAT OPERATORS ASSOCIATION",
+            "model": "iboa",
+        },
     }
     association_desc = associations[association]
     name = association_desc["name"]
