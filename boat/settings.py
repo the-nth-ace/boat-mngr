@@ -38,6 +38,7 @@ DEBUG = os.environ.get("DEBUG")
 ALLOWED_HOSTS = [
     "atbowaton.herokuapp.com",
     "atbowaton-ikorodu.com",
+    "www.atbowaton-ikorodu.com",
     "https://www.atbowaton-ikorodu.com",
 ]
 
