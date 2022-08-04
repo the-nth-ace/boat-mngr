@@ -68,6 +68,8 @@
             {% block maincontent %}
                   {{ message.tag }}
             {% endblock maincontent %}
+            {% block scripts %}
+            {% endblock scripts %}
             <!-- Core -->
             <script src="{% static 'core/vendor/@popperjs/core/dist/umd/popper.min.js' %}"></script>
             <script src="{% static 'core/vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>

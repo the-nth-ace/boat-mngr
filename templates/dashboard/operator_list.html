@@ -1,9 +1,9 @@
-mo{% extends 'dashboard_base.html' %}
+{% extends 'dashboard_base.html' %}
 {% block title %}
     All Businesses
 {% endblock title %}
 {% block content %}
-<div class="py-4">
+    <div class="py-4">
         <a href="{% url 'dashboard_operator_add' %}"
            class="btn btn-gray-800 d-inline-flex align-items-center me-2">
             <svg class="icon icon-xs me-2"
@@ -11,12 +11,17 @@ mo{% extends 'dashboard_base.html' %}
                  stroke="currentColor"
                  viewBox="0 0 24 24"
                  xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
             </svg>
             New Operator
         </a>
-</div>
-<div class="row">
+    </div>
+    <div class="row">
         <div class="col-12 col-xl-12">
             <div class="row">
                 <div class="col-12 mb-4">
@@ -29,7 +34,7 @@ mo{% extends 'dashboard_base.html' %}
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush">
+                            <table class="table align-items-center table-flush" id="dataTable">
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="border-bottom" scope="col">Operator name</th>
@@ -43,8 +48,8 @@ mo{% extends 'dashboard_base.html' %}
                                 <tbody>
                                     {% for operator in operators %}
                                         <tr>
-                                            <th class="text-gray-900" scope="row">{{ operator.name }}</th>
-                                            <th class="text-gray-900" scope="row">{{ operator.get_association_display }}</th>
+                                            <td class="text-gray-900" scope="row">{{ operator.name }}</td>
+                                            <td class="text-gray-900" scope="row">{{ operator.get_association_display }}</td>
                                             <td class="fw-bolder text-gray-500">{{ operator.boats }}</td>
                                             <td class="fw-bolder text-gray-500">{{ operator.contact_info }}</td>
                                             <td class="fw-bolder text-gray-500">
@@ -53,9 +58,11 @@ mo{% extends 'dashboard_base.html' %}
                                                          fill="currentColor"
                                                          viewBox="0 0 20 20"
                                                          xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd"
+                                                        <path
+                                                        fill-rule="evenodd"
                                                         d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
-                                                        clip-rule="evenodd" />
+                                                        clip-rule="evenodd"
+                                                        />
                                                     </svg>
                                                     {{ operator.average_rating }}
                                                 </div>
@@ -67,9 +74,11 @@ mo{% extends 'dashboard_base.html' %}
                                                          viewBox="0 0 24 24"
                                                          fill="currentColor">
                                                         <path
-                                                        d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                                        d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
+                                                        />
                                                         <path
-                                                        d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                                        d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
+                                                        />
                                                     </svg>
                                                 </a>
                                             </td>
@@ -82,5 +91,8 @@ mo{% extends 'dashboard_base.html' %}
                 </div>
             </div>
         </div>
-</div>
+    </div>
 {% endblock content %}
+{% block scripts %}
+    {% include "search_scripts.html" %}
+{% endblock scripts %}

@@ -1,138 +1,106 @@
-{% extends "base.html" %} {% block content %}
-<main id="main">
-  <!-- ======= Team Section ======= -->
-  <section id="team" class="team section-bg">
-    <div class="container">
-      <div class="section-title boats-heading1">
-        <div class="row section-title1 boats-heading3">
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member">
-              <div class="member-info">
-                <h4>{{ boat.name }}</h4>
-                <span>
-                  <b>LASWA Approval: {{ boat.laswa_approval_date }}</b></span
-                >
-                <span>
-                  <b> NIWA Approval: {{ boat.niwa_approval_date }}</b>
-                </span>
-                <span>
-                  <b> Certification Status: {{ boat.certification_status }}</b>
-                </span>
-                <span> <b> Rating: {{ boat.reviews_count }}</b> </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row boats-heading2">
-        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-          <div class="member">
-            <div class="member-img">
-              <img
-                height=""
-                width=""
-                src="{{ boat.captain_photo.url }}"
-                class="img-fluid"
-                alt="captain"
-              />
-            </div>
-            <div class="member-info">
-              <h4>Captain</h4>
-              <span>{{ boat.captain_name }}</span>
-              <span>Certifications: {{ boat.captain_certification }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-          <div class="member">
-            <div class="member-img">
-              <img
-                height=""
-                width=""
-                src="{{ boat.deckhand_photo.url }}"
-                class="img-fluid"
-                alt="deckhand"
-              />
-            </div>
-            <div class="member-info">
-              <h4>Deckhand</h4>
-              <span>{{ boat.deckhand_name }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End Team Section -->
-  <div class="container">
-    <div class="container my-5 py-5 text-area">
-      <div class="row d-flex justify-content-center text-area">
-        <div class="col-md-12 col-lg-10 col-xl-8">
-          <form
-            class="card"
-            action="{% url 'one_boat' boat.pk %}"
-            method="post"
-          >
-            {% csrf_token %}
-            <div class="card-footer py-3 border-0">
-              <div class="d-flex flex-start w-100">
-                <div class="form-outline w-100">
-                  <textarea
-                    class="form-control"
-                    id="textAreaExample"
-                    placeholder="Have a comment?"
-                    rows="4"
-                    name="content"
-                    style="background: #fff"
-                  ></textarea>
+{% extends "base.html" %}
+{% block content %}
+  <main id="main">
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container">
+        <div class="section-title boats-heading1">
+          <div class="row section-title1 boats-heading3">
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+              <div class="member">
+                <div class="member-info">
+                  <h4>{{ boat.name }}</h4>
+                  <span>
+                    <b>LASWA Approval: {{ boat.laswa_approval_date }}</b></span
+                  >
+                  <span>
+                    <b> NIWA Approval: {{ boat.niwa_approval_date }}</b>
+                  </span>
+                  <span>
+                    <b> Certification Status: {{ boat.certification_status }}</b>
+                  </span>
+                  <span> <b> Rating: {{ boat.reviews_count }}</b> </span>
                 </div>
               </div>
-
-              <div class="float-end mt-2 pt-1">
-                <button type="submit" class="btn btn-secondary btn-sm">
-                  Post comment
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- </section> -->
-
-    <div class="review-list">
-      <ul>
-        <li>
-          {% for review in reviews %}
-          <div class="d-flex d-flex1">
-            <div class="right">
-              <!-- <h4>
-                            Askbootstrap
-                            <span class="gig-rating text-body-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="15" height="15">
-                                    <path
-                                        fill="currentColor"
-                                        d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
-                                    ></path>
-                                </svg>
-                                5.0
-                            </span>
-                        </h4> -->
-              <!-- <div class="country d-flex align-items-center">
-                <span>
-                                <img class="country-flag img-fluid" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
-                            </span>
-                            <div class="country-name font-accent">India</div>
-              </div> -->
-              <div class="review-description">
-                <p>{{ review.content }}</p>
-              </div>
-              <span class="publish py-3 d-inline-block w-100"
-                >Published {{review.created}}</span
-              >
             </div>
           </div>
-        </li>
+        </div>
+        <div class="row boats-heading2">
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img height=""
+                     width=""
+                     src="{{ boat.captain_photo.url }}"
+                     class="img-fluid"
+                     alt="captain"/>
+              </div>
+              <div class="member-info">
+                <h4>Captain</h4>
+                <span>{{ boat.captain_name }}</span>
+                <span>Certifications: {{ boat.captain_certification }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img height=""
+                     width=""
+                     src="{{ boat.deckhand_photo.url }}"
+                     class="img-fluid"
+                     alt="deckhand"/>
+              </div>
+              <div class="member-info">
+                <h4>Deckhand</h4>
+                <span>{{ boat.deckhand_name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Team Section -->
+    <div class="container">
+      <div class="container my-5 py-5 text-area">
+        <div class="row d-flex justify-content-center text-area">
+          <div class="col-md-12 col-lg-10 col-xl-8">
+            <form class="card" action="{% url 'one_boat' boat.pk %}" method="post">
+              {% csrf_token %}
+              <div class="card-footer py-3 border-0">
+                <div class="d-flex flex-start w-100">
+                  <div class="form-outline w-100">
+                    <textarea class="form-control"
+                              id="textAreaExample"
+                              placeholder="Have a comment?"
+                              rows="4"
+                              name="content"
+                              style="background: #fff"></textarea>
+                  </div>
+                </div>
+                <div class="float-end mt-2 pt-1">
+                  <button type="submit" class="btn btn-secondary btn-sm">Post comment</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- </section> -->
+      <div class="review-list">
+        <ul>
+          {% for review in reviews %}
+            <li>
+              <div class="d-flex d-flex1">
+                <div class="right">
+                  <div class="review-description">
+                    <p>{{ review.content }}</p>
+                  </div>
+                <span class="publish py-3 d-inline-block w-100">Published {{ review.created }}</span
+                >
+              </div>
+            </div>
+          </li>
         {% endfor %}
       </ul>
     </div>
