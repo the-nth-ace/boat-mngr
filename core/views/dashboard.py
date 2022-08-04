@@ -234,7 +234,7 @@ class ReviewUpdateView(ReviewViewSetup, UpdateView):
 def delete_review(request, pk):
     review = get_object_or_404(Review, pk=pk)
     review.delete()
-    return redirect(reverse("dashboard_view_list"))
+    return redirect(reverse("dashboard_review_list"))
 
 
 # TODO Change Password View
