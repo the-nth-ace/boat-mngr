@@ -37,9 +37,6 @@ DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = [
     "atbowaton.herokuapp.com",
-    "localhost",
-    "127.0.0.1",
-    "www.atbowaton-ikorodu.com",
     "atbowaton-ikorodu.com",
     "https://www.atbowaton-ikorodu.com",
 ]
