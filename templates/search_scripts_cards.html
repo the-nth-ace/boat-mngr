@@ -1,0 +1,40 @@
+<script>
+  const input = document.getElementById("JsSearchQuery");
+  var filter, container, cardLinks, td, i, txtValue;
+  filter = input.value.toUpperCase();
+  container = document.getElementById("jsBoatContainer");
+  cardLinks = container.getElementsByTagName("a");
+
+  function searchCards() {
+    filter = input.value.toUpperCase();
+    for (i = 0; i < cardLinks.length; i++) {
+      boatNameDiv = cardLinks[i].getElementsByClassName("member-info")[0];
+
+      if (boatNameDiv) {
+        boatNameTag = boatNameDiv.getElementsByTagName("h4")[0];
+        boatNameVal = boatNameTag.textContent || boatNameTag.innerText;
+
+        /* Convert boatNameVal to uppercase if it's not a number*/
+        boatNameVal = isNaN(boatNameVal)
+          ? boatNameVal.toUpperCase()
+          : boatNameVal;
+
+        if (boatNameVal.indexOf(filter) > -1) {
+          cardLinks[i].classList.remove("d-none");
+          cardLinks[i].classList.add("d-flex");
+        } else {
+          cardLinks[i].classList.remove("d-flex");
+          cardLinks[i].classList.add("d-none");
+        }
+      }
+    }
+  }
+
+  input.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+
+      searchCards();
+    }
+  });
+</script>

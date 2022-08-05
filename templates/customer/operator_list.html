@@ -1,37 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
-<main id="main">
+  <main id="main">
     <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg ">
-      <div class="container ">
+    <section id="team" class="team section-bg">
+      <div class="container">
         <div class="section-title">
-          
-          <h3>{{acronym}}<span></span></h3>
+          <h3>{{ acronym }}</h3>
           <br />
-          <h2>
-            {{name}}
-          </h2>
+          <h2>{{ name }}</h2>
+        </div>
+        <br />
+        <div class="input-group">
+          <div class="form-outline">
+            <input type="search"
+                   id="JsSearchQuery"
+                   class="form-control"
+                   placeholder="Search operators..."/>
+            <!-- </div> -->
           </div>
-          <br>
-          <!-- <div class="input-group1"> -->
-            <div class="input-group">
-              <div class="form-outline">
-                <input type="search" id="form1" class="form-control" placeholder="Search here" />
-              <!-- </div> -->
-            </div>
-
-          </div>
-
-
+        </div>
         <section class="intro">
           <div class="gradient-custom-1 h-100">
             <div class="mask d-flex align-items-center h-100">
               <div class="container">
-                
                 <div class="row justify-content-center">
                   <div class="col-12">
                     <div class="table-responsive bg-white">
-                      <table class="table mb-0">
+                      <table class="table mb-0" id="dataTable">
                         <thead>
                           <tr>
                             <th scope="col">OPERATOR NAME</th>
@@ -41,13 +36,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                            {% for operator in operators %}
-                          <tr class="table-row" onclick="location.href='/operators/{{ operator.pk }}'">
-                            <th scope="row" style="color: #666666;">{{operator.name}}</th>
-                            <td>{{operator.contact_info}}</td>
-                            <td>{{operator.operation_commenced}}</td>
-                            <td>{{operator.boats}}</td>
-                          </tr>
+                          {% for operator in operators %}
+                            <tr class="table-row"
+                                onclick="location.href='/operators/{{ operator.pk }}'">
+                              <td scope="row" style="color: #666666;">{{ operator.name }}</td>
+                              <td>{{ operator.contact_info }}</td>
+                              <td>{{ operator.operation_commenced }}</td>
+                              <td>{{ operator.boats }}</td>
+                            </tr>
                           {% endfor %}
                         </tbody>
                       </table>
@@ -58,5 +54,10 @@
             </div>
           </div>
         </section>
+      </div>
+    </section>
   </main>
 {% endblock content %}
+{% block scripts %}
+  {% include "search_scripts.html" %}
+{% endblock scripts %}
