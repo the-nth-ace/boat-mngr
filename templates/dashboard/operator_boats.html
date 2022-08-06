@@ -1,0 +1,61 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}
+    {{ operator.name }} Boats
+{% endblock title %}
+{% block content %}
+    <div class="row py-4">
+        <div class="col-12 col-xl-12">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card border-0 shadow">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2 class="fs-5 fw-bold mb-0">{{ operator.name }}Boats</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush" id="dataTable">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="border-bottom" scope="col">Name</th>
+                                        <th class="border-bottom" scope="col">Operator</th>
+                                        <th class="border-bottom" scope="col">Captain</th>
+                                        <th class="border-bottom" scope="col">Capacity</th>
+                                        <th class="border-bottom" scope="col">Average Rating</th>
+                                        <th class="border-bottom" scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for boat in boats %}
+                                        <tr>
+                                            <td class="fw-bolder text-gray-500" scope="row">{{ boat.name }}</td>
+                                            <td class="fw-bolder text-gray-500">{{ boat.operator.name }}</td>
+                                            <td class="fw-bolder text-gray-500">{{ boat.captain_name }}</td>
+                                            <td class="fw-bolder text-gray-500">{{ boat.capacity }}</td>
+                                            <td class="fw-bolder text-gray-500 text-center">3.5</td>
+                                            <td>
+                                                <a href="{% url 'dashboard_boat_detail' boat.pk %}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         class="icon icon-sm"
+                                                         viewBox="0 0 24 24"
+                                                         fill="currentColor">
+                                                        <path
+                                                        d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                                        <path
+                                                        d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

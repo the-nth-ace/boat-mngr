@@ -5,7 +5,9 @@ from core.views import dashboard, main
 # SECTION Main views
 urlpatterns = [
     path("", main.homepage, name="homepage"),
-    path("associations/<str:association>/", main.operator_list_page, name="operator_list"),
+    path(
+        "associations/<str:association>/", main.operator_list_page, name="operator_list"
+    ),
     # path("businesses/", main.business_list_page, name="business_list"),
     path("operators/<int:pk>/", main.operator_detail, name="operator_detail"),
     path("login/", main.login_page, name="login_page"),

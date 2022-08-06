@@ -77,8 +77,20 @@ class OperatorDetailView(OperatorViewSetup, DetailView):
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
+        boats = Boat.objects.filter(operator=self.get_object())
+        context["boats"] = boats
         context["active"] = "operators"
+
         return context
+
+
+@login_required
+def operator_boats(request, pk):
+    operator = get_object_or_404(Operator, pk=pk)
+    boats = Boat.objects.filter(operator=operator)
+    context = {"operator": operator, "boats": boats, "active": "operators"}
+
+    return render(request, "dashboard/operator_boats.html", context)
 
 
 @login_required
@@ -100,6 +112,7 @@ class BoatListView(BoatViewSetup, ListView):
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
+
         context["active"] = "boats"
         return context
 

@@ -65,7 +65,7 @@ class Boat(models.Model):
     capacity = models.IntegerField()
     captain_name = models.CharField(max_length=100)
     captain_certification = models.CharField(max_length=1000, default="")
-    captain_photo = models.ImageField(upload_to=rename_captain_boat_photo_path)
+    captain_photo = models.ImageField(upload_to="mediafiles/captains/")
     deckhand_name = models.CharField(max_length=100)
     deckhand_photo = models.ImageField(upload_to=rename_deckhand_boat_photo_path)
     operator = models.ForeignKey(Operator, on_delete=models.CASCADE)
