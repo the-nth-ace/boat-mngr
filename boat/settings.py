@@ -39,11 +39,13 @@ ALLOWED_HOSTS = [
     "atbowaton.herokuapp.com",
     "atbowaton-ikorodu.com",
     "www.atbowaton-ikorodu.com",
+    "atbowaton.onrender.com",
     "127.0.0.1",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://www.atbowaton-ikorodu.com",
+    "https://atbowaton.onrender.com/",
 ]
 
 
